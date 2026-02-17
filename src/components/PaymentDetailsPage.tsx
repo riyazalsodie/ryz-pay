@@ -135,12 +135,12 @@ const PaymentDetailsPage = () => {
 
                         <div className="bg-white shadow shadow-[#0057d0]/5 rounded-lg px-5 py-3 sm:h-[85px] flex items-center sm:w-[70%] sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10">
                             <div className="w-[55px] h-[55px] p-1.5 flex justify-center items-center mr-4 ring-1 ring-[#0057d0]/10 rounded-full">
-                                <img src="/assets/63e557be80f047-41431550-10926609.png" alt="Amar Host" className="w-[80%]" />
+                                <img src="/assets/63e557be80f047-41431550-10926609.png" alt="RYZ PAY" className="w-[80%]" />
                             </div>
                             <div className="flex flex-col">
-                                <h3 className="font-semibold text-[#6D7F9A]">Amar Host</h3>
+                                <h3 className="font-semibold text-[#6D7F9A]">RYZ PAY</h3>
                                 <span className="text-[#94a9c7] text-sm font-bangla">ইনভয়েস আইডিঃ</span>
-                                <p className="text-[#6D7F9A] text-sm font-mono">7qwbSv7Cz4p9m5qURVZg</p>
+                                <p className="text-[#6D7F9A] text-sm">7qwbSv7Cz4p9m5qURVZg</p>
                             </div>
                         </div>
 
@@ -161,7 +161,7 @@ const PaymentDetailsPage = () => {
                                 placeholder="ট্রান্সজেকশন আইডি দিন"
                                 value={trxId}
                                 onChange={(e) => setTrxId(e.target.value)}
-                                className="font-bangla appearance-none w-full text-[15px] rounded-[10px] bg-white shadow-inner px-5 py-3.5 placeholder-[#94A9C7] focus:outline-none focus:ring-2 focus:ring-white/20 text-center font-mono uppercase tracking-widest"
+                                className="font-bangla appearance-none w-full text-[15px] rounded-[10px] bg-white shadow-inner px-5 py-3.5 placeholder-[#94A9C7] focus:outline-none focus:ring-2 focus:ring-white/20 text-center uppercase tracking-widest"
                                 maxLength={16}
                             />
                         </div>
@@ -170,7 +170,7 @@ const PaymentDetailsPage = () => {
                             <div className="w-full bg-white/10 rounded-lg p-4 mb-4">
                                 <p className="text-white/80 text-xs mb-1 font-bangla">প্রাপক নম্বর (Personal)</p>
                                 <div className="flex justify-between items-center">
-                                    <span className="text-lg font-bold text-white font-mono tracking-wider">{recipientNumber}</span>
+                                    <span className="text-lg font-bold text-white tracking-wider">{recipientNumber}</span>
                                     <button
                                         onClick={() => handleCopy(recipientNumber)}
                                         className="bg-white/20 text-white p-1.5 rounded-md hover:bg-white/30 transition-colors"

@@ -15,8 +15,8 @@ const IBBLBankingPage: React.FC<IBBLBankingPageProps> = ({ onBack, onCancel, onS
 
   const amount = '2200'
   const invoiceId = '7qwbSv7Cz4p9m5qURVZg'
-  const merchantName = 'Amar Host'
-  const bankAccountName = 'Amar Host Ltd.'
+  const merchantName = 'RYZ PAY'
+  const bankAccountName = 'RYZ PAY Ltd.'
   const bankAccountNumber = '20502130100209900'
   const bankBranch = 'Gulshan Circle-1'
   const bankRouting = '125261828'
@@ -101,7 +101,7 @@ const IBBLBankingPage: React.FC<IBBLBankingPageProps> = ({ onBack, onCancel, onS
               <div className="flex flex-col">
                 <h3 className="font-semibold text-[#6D7F9A]">{merchantName}</h3>
                 <span className="text-[#94a9c7] text-sm font-bangla">ইনভয়েস আইডিঃ</span>
-                <p className="text-[#6D7F9A] text-sm select-all font-mono">{invoiceId}</p>
+                <p className="text-[#6D7F9A] text-sm select-all">{invoiceId}</p>
               </div>
             </div>
 
@@ -118,12 +118,12 @@ const IBBLBankingPage: React.FC<IBBLBankingPageProps> = ({ onBack, onCancel, onS
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="opacity-80">Account Name:</span>
-                    <span className="font-semibold font-mono">{bankAccountName}</span>
+                    <span className="font-semibold">{bankAccountName}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="opacity-80">Account Number:</span>
                     <div className="flex items-center">
-                      <span className="font-semibold font-mono mr-2">{bankAccountNumber}</span>
+                      <span className="font-semibold mr-2">{bankAccountNumber}</span>
                       <button type="button" onClick={() => handleCopy(bankAccountNumber)}>
                         {copied ? <CheckCircle2 className="w-3 h-3 text-white" /> : <Copy className="w-3 h-3 text-white/70 hover:text-white" />}
                       </button>
@@ -135,7 +135,7 @@ const IBBLBankingPage: React.FC<IBBLBankingPageProps> = ({ onBack, onCancel, onS
                   </div>
                   <div className="flex justify-between">
                     <span className="opacity-80">Routing No:</span>
-                    <span className="font-semibold font-mono">{bankRouting}</span>
+                    <span className="font-semibold">{bankRouting}</span>
                   </div>
                 </div>
               </div>

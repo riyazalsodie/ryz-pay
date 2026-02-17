@@ -25,10 +25,10 @@ const NagadPersonalDetails = () => {
 
             <div className="text-center mb-6">
                 <img src="/assets/nagad.png" alt="Nagad" className="h-12 mx-auto mb-2" />
-                <h2 className="text-lg font-bold text-slate-800 font-bangla">Amar Host</h2>
+                <h2 className="text-lg font-bold text-slate-800 font-bangla">RYZ PAY</h2>
                 <div className="flex justify-center items-center gap-2 text-sm text-slate-500 font-bangla">
                     <span>ইনভয়েস আইডিঃ</span>
-                    <span className="font-mono font-semibold text-slate-700">7qwbSv7Cz4p9m5qURVZg</span>
+                    <span className="font-semibold text-slate-700">7qwbSv7Cz4p9m5qURVZg</span>
                 </div>
             </div>
 
@@ -41,7 +41,7 @@ const NagadPersonalDetails = () => {
                 <div className="bg-white rounded-md border border-[#0057d0]/20 p-3 relative overflow-hidden group">
                     <p className="text-xs text-slate-500 mb-1 font-bangla">প্রাপক নম্বর (Personal)</p>
                     <div className="flex justify-between items-center">
-                        <span className="text-lg font-bold text-slate-700 font-mono tracking-wider">01762905013</span>
+                        <span className="text-lg font-bold text-slate-700 tracking-wider">01762905013</span>
                         <button
                             onClick={() => handleCopy('01762905013')}
                             className="bg-[#c90008] text-white p-1.5 rounded-md hover:bg-[#af0007] transition-colors"
@@ -67,7 +67,7 @@ const NagadPersonalDetails = () => {
                     placeholder="ট্রান্সজেকশন আইডি দিন"
                     value={trxId}
                     onChange={(e) => setTrxId(e.target.value)}
-                    className="w-full p-3 border border-[#0057d0]/20 rounded-md focus:outline-none focus:ring-2 focus:ring-[#c90008]/30 font-mono text-center uppercase tracking-widest placeholder:font-bangla placeholder:tracking-normal"
+                    className="w-full p-3 border border-[#0057d0]/20 rounded-md focus:outline-none focus:ring-2 focus:ring-[#c90008]/30 text-left uppercase tracking-widest placeholder:font-bangla placeholder:tracking-normal"
                 />
                 <button
                     disabled={!trxId}

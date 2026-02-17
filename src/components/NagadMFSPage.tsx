@@ -18,7 +18,7 @@ const NagadMFSPage: React.FC<NagadMFSPageProps> = ({ onBack, onCancel, onVerify 
   const recipientNumber = '01762905013'
   const amount = '2200'
   const invoiceId = '7qwbSv7Cz4p9m5qURVZg'
-  const merchantName = 'Amar Host'
+  const merchantName = 'RYZ PAY'
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text)
@@ -122,7 +122,7 @@ const NagadMFSPage: React.FC<NagadMFSPageProps> = ({ onBack, onCancel, onVerify 
               <div className="flex flex-col">
                 <h3 className="font-semibold text-[#6D7F9A]">{merchantName}</h3>
                 <span className="text-[#94a9c7] text-sm font-bangla">ইনভয়েস আইডিঃ</span>
-                <p className="text-[#6D7F9A] text-sm select-all font-mono">{invoiceId}</p>
+                <p className="text-[#6D7F9A] text-sm select-all">{invoiceId}</p>
               </div>
             </div>
 
@@ -147,7 +147,7 @@ const NagadMFSPage: React.FC<NagadMFSPageProps> = ({ onBack, onCancel, onVerify 
                   placeholder="ট্রান্সজেকশন আইডি দিন"
                   value={transactionId}
                   onChange={(e) => setTransactionId(e.target.value)}
-                  className="font-bangla appearance-none w-full text-[15px] rounded-[10px] sm:bg-[#fbfcff] bg-white shadow shadow-[#0057d0]/5 px-5 py-3.5 placeholder-[#94A9C7] focus:outline-none focus:ring-1 focus:ring-white text-center font-mono uppercase tracking-widest"
+                  className="font-bangla appearance-none w-full text-[15px] rounded-[10px] sm:bg-[#fbfcff] bg-white shadow shadow-[#0057d0]/5 px-5 py-3.5 placeholder-[#94A9C7] focus:outline-none focus:ring-1 focus:ring-white text-left uppercase tracking-widest"
                   maxLength={16}
                   required
                 />
