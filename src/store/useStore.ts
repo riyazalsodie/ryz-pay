@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-export type TabType = 'mobile_banking' | 'net_banking' | 'cards' | 'support' | 'faq' | 'transactions';
+export type TabType = 'mobile_banking' | 'net_banking' | 'support' | 'faq' | 'transactions';
 export type LanguageType = 'bangla' | 'english';
 
 export interface PaymentMethod {

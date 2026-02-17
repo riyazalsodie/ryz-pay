@@ -7,31 +7,33 @@ import upayImg from '/assets/upay.png'
 import cellfinImg from '/assets/cellfin.png'
 import ibblImg from '/assets/650b4744ef1353-87739222-60070744.png' // IBBL
 
-const PaymentGrid = ({ type }: { type: 'mobile_banking' | 'cards' | 'net_banking' }) => {
+const PaymentGrid = ({ type, methods = [] }: { type: 'mobile_banking' | 'net_banking', methods?: any[] }) => {
     const { openModal } = useStore()
     const navigate = useNavigate()
 
-    const mobileOptions = [
-        { id: 'bkash', name: 'bKash', img: bkashImg },
-        { id: 'nagad', name: 'Nagad', img: nagadImg },
-        { id: 'rocket', name: 'Rocket', img: rocketImg },
-        { id: 'upay', name: 'Upay', img: upayImg },
-        { id: 'cellfin', name: 'Cellfin', img: cellfinImg },
-    ]
+    const mobileOptions = methods.filter(m => m.active).map(m => ({
+        id: m.name.toLowerCase(),
+        name: m.name,
+        img: `/assets/${m.icon}`
+    }))
 
-    const cardOptions = [
-        { id: 'visa', name: 'Visa', img: '/assets/logo.webp' },
-        { id: 'mastercard', name: 'Mastercard', img: '/assets/logo.webp' },
-    ]
-
+    // Fallback if none (or simple manual filter for demonstration)
     const netOptions = [
         { id: 'ibbl', name: 'Islami Bank', img: ibblImg },
     ]
 
     let options = []
-    if (type === 'mobile_banking') options = mobileOptions
-    else if (type === 'cards') options = cardOptions
-    else options = netOptions
+    if (type === 'mobile_banking') {
+        options = mobileOptions.length > 0 ? mobileOptions : [
+            { id: 'bkash', name: 'bKash', img: bkashImg },
+            { id: 'nagad', name: 'Nagad', img: nagadImg },
+            { id: 'rocket', name: 'Rocket', img: rocketImg },
+            { id: 'upay', name: 'Upay', img: upayImg },
+            { id: 'cellfin', name: 'Cellfin', img: cellfinImg },
+        ]
+    } else {
+        options = netOptions
+    }
 
     return (
         <div className="grid grid-cols-2 gap-5 sm:grid-cols-4 pb-6">
@@ -39,16 +41,12 @@ const PaymentGrid = ({ type }: { type: 'mobile_banking' | 'cards' | 'net_banking
                 <div
                     key={option.id}
                     onClick={() => {
-                        // Generate a sample hash for the checkout URL
                         const hash = 'bac303ad226facb3bbea00fcc5e2a078b1cd8284'
-
-                        // Special handling for MFS providers and banks - go to dedicated pages
                         if (option.id === 'ibbl') {
                             navigate({ to: '/checkout/ibbl' })
                         } else if (option.id === 'bkash' || option.id === 'nagad') {
                             openModal(option);
                         } else {
-                            // Direct navigation for other MFS providers (Rocket, Upay, Cellfin)
                             navigate({ to: '/checkout/mfs/$provider/$type/$hash', params: { provider: option.id, type: '1', hash } })
                         }
                     }}

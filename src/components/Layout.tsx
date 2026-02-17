@@ -1,4 +1,5 @@
-
+import React from 'react'
+import { useLocation } from '@tanstack/react-router'
 import Header from './Header'
 import Profile from './Profile'
 import PaymentTabs from './PaymentTabs'
@@ -9,18 +10,19 @@ import FAQSection from './FAQSection'
 import Footer from './Footer'
 import PaymentModal from './PaymentModal'
 import useStore from '../store/useStore'
+import { Route } from '../routes/index'
 
 const Layout = () => {
+    const { paymentMethods } = Route.useLoaderData()
     const { activeTab } = useStore()
 
     const renderContent = () => {
         switch (activeTab) {
             case 'mobile_banking':
-                return <PaymentGrid type="mobile_banking" />
-            case 'cards':
-                return <PaymentGrid type="cards" />
+                return <PaymentGrid type="mobile_banking" methods={paymentMethods} />
+
             case 'net_banking':
-                return <PaymentGrid type="net_banking" />
+                return <PaymentGrid type="net_banking" methods={paymentMethods} />
             case 'support':
                 return <SupportSection />
             case 'transactions':
@@ -28,17 +30,12 @@ const Layout = () => {
             case 'faq':
                 return <FAQSection />
             default:
-                return <PaymentGrid type="mobile_banking" />
+                return <PaymentGrid type="mobile_banking" methods={paymentMethods} />
         }
     }
 
     return (
         <div className="w-full min-h-screen sm:h-auto sm:p-12 sm:flex sm:items-center sm:justify-center font-sans">
-            {/* Background is set in index.css body or here via utility if needed, but body has it in original CSS. 
-           We'll assume body class in index.html or global css handled it. 
-           Actually, original body class: "background: linear-gradient(350deg, #f4f9ff, #edf4ffc9), url(...)"
-           We should add this to index.css or a wrapper here. 
-       */}
             <div className="fixed inset-0 z-[-1] bg-gradient-to-br from-blue-50 to-blue-100 pointer-events-none"></div>
 
             <div className="up-container max-w-md overflow-hidden mx-auto p-8 relative sm:bg-white sm:rounded-lg sm:shadow-lg sm:shadow-[#0057d0]/10 sm:min-w-[650px] sm:flex sm:flex-wrap bg-[#fbfcff]">

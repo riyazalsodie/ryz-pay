@@ -19,18 +19,9 @@ const PaymentTabs = () => {
                 মোবাইল ব্যাংকিং
             </button>
             <button
-                onClick={() => setActiveTab('cards')}
-                className={clsx(
-                    "w-full py-1.5 text-center text-[12px] sm:text-[15px] transition-all duration-300 font-bangla border-x border-white/10",
-                    activeTab === 'cards' ? "bg-[#004cb7]" : "hover:bg-[#0057d0]/80"
-                )}
-            >
-                কার্ডস
-            </button>
-            <button
                 onClick={() => setActiveTab('net_banking')}
                 className={clsx(
-                    "w-full py-1.5 text-center text-[12px] sm:text-[15px] transition-all duration-300 font-bangla",
+                    "w-full py-1.5 text-center text-[12px] sm:text-[15px] transition-all duration-300 font-bangla border-l border-white/10",
                     activeTab === 'net_banking' ? "bg-[#004cb7]" : "hover:bg-[#0057d0]/80"
                 )}
             >

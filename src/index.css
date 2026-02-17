@@ -1,91 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer components {
-    .section-btn {
-        @apply block rounded-lg border border-transparent bg-white p-2.5 shadow-md shadow-[#0057d0]/5 transition-all duration-200 hover:shadow-lg hover:shadow-[#0057d0]/10 sm:flex sm:bg-[#fbfcff] sm:px-3 sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10;
-    }
+@theme {
+    --font-sans: "Baloo Da 2", ui-sans-serif, system-ui, sans-serif;
+}
 
-    .section-btn.active {
-        @apply bg-[#f1f6ff] border-[#0057d0]/10;
-        /* customized based on original active state */
-    }
-
-    .bank-img-div {
-        @apply relative flex h-16 cursor-pointer justify-center overflow-hidden p-px;
-    }
-
-    .bank-img {
-        @apply mx-auto h-[70%] w-[70%] object-cover transition-all duration-300 hover:scale-90;
-    }
-
-    .support-div {
-        @apply flex items-center rounded-lg bg-white py-3 px-4 shadow-md shadow-[#0057d0]/5 sm:bg-[#fbfcff] sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10 transition-all duration-200 hover:shadow-lg hover:shadow-[#0057d0]/10;
-    }
-
-    .up-nav-tab {
-        @apply hidden;
-        /* default hidden, logic handles display */
-    }
-
-    .up-nav-tab.active {
-        @apply block;
-    }
-
-    /* Navigation tabs from Profile section */
-    .nav-tab-button {
-        @apply rounded-md w-full py-1.5 text-center text-[12px] sm:text-[15px] h-full transition-all duration-300 leading-[23px] font-bangla cursor-pointer;
-    }
-
-    .nav-tab-button.active {
-        @apply bg-[#0057d0] text-white;
-    }
-
-    .nav-tab-button.inactive {
-        @apply text-white hover:bg-[#0057d0]/80;
-    }
-
-    /* Custom scrollbar */
-    ::-webkit-scrollbar {
-        width: 4px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: #f6faff;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #d7e7ff;
-        border-radius: 50px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: #bdd9ff;
-    }
-
-    .font-bangla {
-        font-family: 'Baloo Da 2', cursive;
-    }
-
-    .card-input {
-        @apply transition-all duration-300 hover:shadow-md hover:shadow-[#0057d0]/10 transform hover:-translate-y-1;
-    }
-
-    body {
-        @apply bg-gradient-to-br from-[#f8faff] via-[#edf4ff] to-[#f4faff] min-h-screen;
-        background-attachment: fixed;
-        font-family: 'Baloo Da 2', cursive;
-    }
-
-    .up-container {
-        @apply backdrop-blur-sm bg-white/95;
-    }
-
-    input,
-    button,
-    select,
-    textarea {
-        font-family: 'Baloo Da 2', cursive !important;
-    }
+body {
+    @apply font-sans;
 }
