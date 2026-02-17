@@ -10,7 +10,7 @@ const Header = () => {
   }
 
   return (
-    <div className="w-full h-12 shadow-md shadow-[#0057d0]/5 rounded-lg overflow-hidden flex justify-between items-center p-5 bg-white sm:bg-[#fbfcff]  sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10">
+    <div className="w-full h-12 shadow-md shadow-[#0057d0]/5 rounded-lg overflow-hidden flex justify-between items-center p-5 bg-white sm:bg-[#fbfcff]  sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10 dark:bg-black dark:border-b dark:border-white/10 dark:ring-0 dark:shadow-none">
       <div className="">
         <a href="#">
           <ChevronLeft className="w-5 h-5 text-[#94A9C7] hover:text-[#6D7F9A] transition-colors" />

@@ -49,12 +49,12 @@ const PaymentModal = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.2 }}
-                className="w-[90%] sm:w-[380px] bg-white p-[20px] rounded-lg border border-[#0057d0] shadow-lg shadow-[#00000030]"
+                className="w-[90%] sm:w-[380px] bg-white p-[20px] rounded-lg border border-[#0057d0] shadow-lg shadow-[#00000030] dark:bg-black dark:border-white/20"
             >
                 {modalPhase === 'selection' && (
                     <>
                         <div className="">
-                            <h1 className="font-bangla text-[18px] text-slate-700 mb-6 pb-2 border-b border-b-[#e5eefa] font-[500]">Select Payment Option</h1>
+                            <h1 className="font-bangla text-[18px] text-slate-700 mb-6 pb-2 border-b border-b-[#e5eefa] font-[500] dark:text-white dark:border-b-white/10">Select Payment Option</h1>
                         </div>
 
                         <div className="grid grid-cols-2 gap-x-4 gap-y-8 mb-6">
@@ -62,9 +62,9 @@ const PaymentModal = () => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => handleSelectSubMethod('personal')}
-                                className="card-input w-full ring-1 ring-[#0057d0]/10 rounded-md flex flex-col justify-center items-center h-[70px] cursor-pointer hover:bg-gray-50 bg-white"
+                                className="card-input w-full ring-1 ring-[#0057d0]/10 rounded-md flex flex-col justify-center items-center h-[70px] cursor-pointer hover:bg-gray-50 bg-white dark:bg-black dark:ring-white/10 dark:hover:bg-white/5"
                             >
-                                <h2 className="mt-2 text-center text-slate-600 text-sm">
+                                <h2 className="mt-2 text-center text-slate-600 text-sm dark:text-gray-300">
                                     {selectedPaymentMethod.name} <span className="bg-[#e2136e] py-[2px] px-[8px] text-xs text-white rounded-full ml-1">Personal</span>
                                 </h2>
                             </motion.div>
@@ -72,9 +72,9 @@ const PaymentModal = () => {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={() => handleSelectSubMethod('live')}
-                                className="card-input w-full ring-1 ring-[#0057d0]/10 rounded-md flex flex-col justify-center items-center h-[70px] cursor-pointer hover:bg-gray-50 bg-white"
+                                className="card-input w-full ring-1 ring-[#0057d0]/10 rounded-md flex flex-col justify-center items-center h-[70px] cursor-pointer hover:bg-gray-50 bg-white dark:bg-black dark:ring-white/10 dark:hover:bg-white/5"
                             >
-                                <h2 className="mt-2 text-center text-slate-600 text-sm">
+                                <h2 className="mt-2 text-center text-slate-600 text-sm dark:text-gray-300">
                                     {selectedPaymentMethod.name} Payment <span className="bg-[#bf2929] py-[2px] px-[8px] text-xs text-white rounded-full ml-1">Live</span>
                                 </h2>
                             </motion.div>
@@ -82,7 +82,7 @@ const PaymentModal = () => {
 
                         <button
                             onClick={closeModal}
-                            className="w-full block text-center p-1 bg-[#0057d0]/10 rounded-md text-[#0057d0] font-medium cursor-pointer hover:bg-[#0057d0]/20 transition-colors"
+                            className="w-full block text-center p-1 bg-[#0057d0]/10 rounded-md text-[#0057d0] font-medium cursor-pointer hover:bg-[#0057d0]/20 transition-colors dark:bg-white/10 dark:text-white dark:hover:bg-white/20"
                         >
                             Close
                         </button>

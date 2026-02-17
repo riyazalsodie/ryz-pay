@@ -56,7 +56,7 @@ const PaymentGrid = ({ type, methods = [] }: { type: 'mobile_banking' | 'net_ban
                     }}
                     className="bank-img-div group cursor-pointer"
                 >
-                    <div className="w-full flex justify-center items-center rounded-md ring-1 ring-[#0057d0]/10 bg-white group-hover:ring-[#0057d0]/20 transition-all overflow-hidden h-16 sm:h-20">
+                    <div className="w-full flex justify-center items-center rounded-md ring-1 ring-[#0057d0]/10 bg-white group-hover:ring-[#0057d0]/20 transition-all overflow-hidden h-16 sm:h-20 dark:bg-black dark:ring-white/10 dark:group-hover:ring-white/30">
                         <motion.img
                             src={option.img}
                             alt={option.name}

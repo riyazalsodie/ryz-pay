@@ -7,3 +7,26 @@
 body {
     @apply font-sans;
 }
+
+:root {
+    color-scheme: light dark;
+}
+
+@layer base {
+    body {
+        @apply antialiased;
+    }
+}
+
+/* OLED Dark Mode Base */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: 0 0% 0%;
+        --foreground: 0 0% 100%;
+    }
+
+    body {
+        background-color: black;
+        color: white;
+    }
+}

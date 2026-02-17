@@ -40,10 +40,10 @@ const Layout = () => {
            Actually, original body class: "background: linear-gradient(350deg, #f4f9ff, #edf4ffc9), url(...)"
            We should add this to index.css or a wrapper here. 
        */}
-            <div className="fixed inset-0 z-[-1] bg-gradient-to-br from-blue-50 to-blue-100 pointer-events-none"></div>
+            <div className="fixed inset-0 z-[-1] bg-gradient-to-br from-blue-50 to-blue-100 dark:from-black dark:to-black pointer-events-none"></div>
 
             <div className="flex flex-col items-center w-full max-w-md mx-auto relative">
-                <div className="up-container w-full overflow-hidden p-8 relative sm:bg-white sm:rounded-lg sm:shadow-lg sm:shadow-[#0057d0]/10 sm:min-w-[650px] sm:flex sm:flex-wrap bg-[#fbfcff]">
+                <div className="up-container w-full overflow-hidden p-8 relative sm:bg-white sm:rounded-lg sm:shadow-lg sm:shadow-[#0057d0]/10 sm:min-w-[650px] sm:flex sm:flex-wrap bg-[#fbfcff] dark:bg-black dark:border dark:border-white/10 dark:shadow-none">
                     <Header />
                     <Profile />
                     <PaymentTabs />
@@ -54,7 +54,7 @@ const Layout = () => {
 
                     <Footer />
                 </div>
-                <div className="text-[10px] text-[#0057d0]/40 font-bold tracking-[0.2em] uppercase mt-4 mb-8 text-center w-full">
+                <div className="text-[10px] text-[#0057d0]/40 font-bold tracking-[0.2em] uppercase mt-4 mb-8 text-center w-full dark:text-gray-500">
                     RYZ PAY Developed BY R ! Y 4 Z
                 </div>
             </div>

@@ -13,7 +13,7 @@ const PaymentTabs = () => {
                 onClick={() => setActiveTab('mobile_banking')}
                 className={clsx(
                     "w-full py-1.5 text-center text-[12px] sm:text-[15px] transition-all duration-300 font-bangla",
-                    activeTab === 'mobile_banking' ? "bg-[#004cb7]" : "hover:bg-[#0057d0]/80"
+                    activeTab === 'mobile_banking' ? "bg-[#004cb7] dark:bg-blue-900" : "hover:bg-[#0057d0]/80"
                 )}
             >
                 মোবাইল ব্যাংকিং
@@ -22,7 +22,7 @@ const PaymentTabs = () => {
                 onClick={() => setActiveTab('net_banking')}
                 className={clsx(
                     "w-full py-1.5 text-center text-[12px] sm:text-[15px] transition-all duration-300 font-bangla border-l border-white/10",
-                    activeTab === 'net_banking' ? "bg-[#004cb7]" : "hover:bg-[#0057d0]/80"
+                    activeTab === 'net_banking' ? "bg-[#004cb7] dark:bg-blue-900" : "hover:bg-[#0057d0]/80"
                 )}
             >
                 নেট ব্যাংকিং

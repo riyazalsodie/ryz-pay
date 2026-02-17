@@ -23,7 +23,7 @@ const Profile = () => {
             </div>
             <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
                 <div className="mb-4 sm:mb-3">
-                    <h3 className="font-semibold text-xl text-[#0057d0] sm:text-[#6D7F9A]">RYZ PAY</h3>
+                    <h3 className="font-semibold text-xl text-[#0057d0] sm:text-[#6D7F9A] dark:text-white">RYZ PAY</h3>
                     {/* Note: Original text color seems to be gray, but maybe blue on active? Sticking to design analysis */}
                 </div>
                 <div className="flex gap-4">
@@ -36,16 +36,16 @@ const Profile = () => {
                                 onClick={() => setActiveTab(tab.id)}
                                 className={clsx(
                                     "section-btn flex items-center justify-center sm:justify-start",
-                                    isActive ? "active text-[#0057d0]" : "text-[#6D7F9A]"
+                                    isActive ? "active text-[#0057d0] dark:text-blue-400" : "text-[#6D7F9A] dark:text-gray-400"
                                 )}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
                             >
-                                <Icon className={clsx("w-5 h-5", isActive ? "text-[#0057d0]" : "text-[#94A9C7]")} />
+                                <Icon className={clsx("w-5 h-5", isActive ? "text-[#0057d0] dark:text-blue-400" : "text-[#94A9C7] dark:text-gray-500")} />
                                 <span className={clsx(
                                     "hidden sm:block text-[14px] ml-3 font-bangla",
-                                    isActive ? "text-[#0057d0]" : "text-[#879ab6]"
+                                    isActive ? "text-[#0057d0] dark:text-blue-400" : "text-[#879ab6] dark:text-gray-400"
                                 )}>
                                     {tab.label}
                                 </span>

@@ -101,12 +101,12 @@ const PaymentDetailsPage = () => {
 
     return (
         <div className="w-full min-h-screen sm:h-auto sm:p-12 sm:flex sm:items-center sm:justify-center animate-in fade-in duration-500">
-            <div className="fixed inset-0 z-[-1] bg-gradient-to-br from-blue-50 to-blue-100 pointer-events-none"></div>
+            <div className="fixed inset-0 z-[-1] bg-gradient-to-br from-blue-50 to-blue-100 dark:from-black dark:to-black pointer-events-none"></div>
 
-            <div className="up-container max-w-md overflow-hidden mx-auto p-8 relative sm:bg-white sm:rounded-lg sm:shadow-lg sm:shadow-[#0057d0]/10 sm:min-w-[650px] sm:flex sm:flex-wrap bg-[#fbfcff]">
+            <div className="up-container max-w-md overflow-hidden mx-auto p-8 relative sm:bg-white sm:rounded-lg sm:shadow-lg sm:shadow-[#0057d0]/10 sm:min-w-[650px] sm:flex sm:flex-wrap bg-[#fbfcff] dark:bg-black dark:border dark:border-white/10 dark:shadow-none">
 
                 {/* Full Nav */}
-                <div className="w-full h-12 shadow-md shadow-[#0057d0]/5 rounded-lg overflow-hidden flex justify-between items-center p-5 bg-white sm:bg-[#fbfcff]  sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10 mb-6">
+                <div className="w-full h-12 shadow-md shadow-[#0057d0]/5 rounded-lg overflow-hidden flex justify-between items-center p-5 bg-white sm:bg-[#fbfcff]  sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10 mb-6 dark:bg-black dark:border-b dark:border-white/10 dark:ring-0 dark:shadow-none">
                     <div>
                         <button onClick={() => setView('dashboard')}>
                             <ChevronLeft className="w-5 h-5 text-[#94A9C7] hover:text-[#6D7F9A] transition-colors" />
@@ -128,19 +128,19 @@ const PaymentDetailsPage = () => {
                             <img src={selectedPaymentMethod.img} alt={selectedPaymentMethod.name} className="h-full object-contain" />
                         </div>
 
-                        <div className="bg-white shadow shadow-[#0057d0]/5 rounded-lg px-5 py-3 sm:h-[85px] flex items-center sm:w-[70%] sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10">
-                            <div className="w-[75px] h-[75px] flex justify-center items-center mr-4 ring-1 ring-[#0057d0]/10 rounded-full overflow-hidden">
+                        <div className="bg-white shadow shadow-[#0057d0]/5 rounded-lg px-5 py-3 sm:h-[85px] flex items-center sm:w-[70%] sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10 dark:bg-black dark:border dark:border-white/10 dark:shadow-none dark:ring-0">
+                            <div className="w-[75px] h-[75px] flex justify-center items-center mr-4 ring-1 ring-[#0057d0]/10 rounded-full overflow-hidden dark:ring-white/10">
                                 <img src="/assets/logo.webp" alt="RYZ PAY" className="w-full h-full object-cover" />
                             </div>
                             <div className="flex flex-col">
-                                <h3 className="font-semibold text-[#6D7F9A]">RYZ PAY</h3>
+                                <h3 className="font-semibold text-[#6D7F9A] dark:text-gray-300">RYZ PAY</h3>
                                 <span className="text-[#94a9c7] text-sm font-bangla">ইনভয়েস আইডিঃ</span>
-                                <p className="text-[#6D7F9A] text-sm">7qwbSv7Cz4p9m5qURVZg</p>
+                                <p className="text-[#6D7F9A] text-sm dark:text-gray-400">7qwbSv7Cz4p9m5qURVZg</p>
                             </div>
                         </div>
 
-                        <div className="bg-white shadow shadow-[#0057d0]/5 rounded-lg py-3 px-2 sm:h-[85px] flex flex-col sm:items-center sm:justify-center sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10 mt-3 sm:w-[25%] sm:mt-0 text-center">
-                            <h1 className="text-xl sm:text-2xl font-semibold text-[#6D7F9A]">৳ {total}</h1>
+                        <div className="bg-white shadow shadow-[#0057d0]/5 rounded-lg py-3 px-2 sm:h-[85px] flex flex-col sm:items-center sm:justify-center sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10 mt-3 sm:w-[25%] sm:mt-0 text-center dark:bg-black dark:border dark:border-white/10 dark:shadow-none dark:ring-0">
+                            <h1 className="text-xl sm:text-2xl font-semibold text-[#6D7F9A] dark:text-white">৳ {total}</h1>
                             {fee !== '0%' && (
                                 <span className="text-xs text-red-600 font-medium mt-1 font-bangla">{fee} ফি যুক্ত হয়েছে</span>
                             )}
@@ -156,7 +156,7 @@ const PaymentDetailsPage = () => {
                                 placeholder="ট্রান্সজেকশন আইডি দিন"
                                 value={trxId}
                                 onChange={(e) => setTrxId(e.target.value)}
-                                className="font-bangla appearance-none w-full text-[15px] rounded-[10px] bg-white shadow-inner px-5 py-3.5 placeholder-[#94A9C7] focus:outline-none focus:ring-2 focus:ring-white/20 text-center uppercase tracking-widest"
+                                className="font-bangla appearance-none w-full text-[15px] rounded-[10px] bg-white shadow-inner px-5 py-3.5 placeholder-[#94A9C7] focus:outline-none focus:ring-2 focus:ring-white/20 text-center uppercase tracking-widest dark:bg-[#111] dark:text-white dark:border dark:border-white/10 dark:placeholder-gray-500"
                                 maxLength={16}
                             />
                         </div>
@@ -201,7 +201,7 @@ const PaymentDetailsPage = () => {
                     </button>
                 </div>
 
-                <div className="w-full mt-8 pt-6 border-t border-[#0057d0]/5 flex justify-center opacity-50">
+                <div className="w-full mt-8 pt-6 border-t border-[#0057d0]/5 flex justify-center opacity-50 dark:border-white/10">
                     <img src="/assets/logo.webp" alt="RYZ PAY" className="h-6" />
                 </div>
             </div>
