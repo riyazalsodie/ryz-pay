@@ -112,11 +112,11 @@ const NagadMFSPage: React.FC<NagadMFSPageProps> = ({ onBack, onCancel, onVerify 
 
             {/* Merchant Info */}
             <div className="bg-white shadow shadow-[#0057d0]/5 rounded-lg px-5 py-3 sm:h-[85px] flex items-center sm:w-[70%] sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10">
-              <div className="w-[55px] h-[55px] p-1.5 flex justify-center items-center mr-4 ring-1 ring-[#0057d0]/10 rounded-full">
+              <div className="w-[75px] h-[75px] flex justify-center items-center mr-4 ring-1 ring-[#0057d0]/10 rounded-full overflow-hidden">
                 <img
-                  src="/assets/63e557be80f047-41431550-10926609.png"
+                  src="/assets/logo.webp"
                   alt={merchantName}
-                  className="w-[80%]"
+                  className="w-full h-full object-cover"
                 />
               </div>
               <div className="flex flex-col">

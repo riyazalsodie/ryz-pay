@@ -15,14 +15,14 @@ const Profile = () => {
         <div className="flex flex-col items-center mt-7 mb-6 sm:mb-3 sm:flex-row w-full">
             <div className="mb-4 sm:mr-8">
                 <img
-                    src="/assets/rz_logo.png"
-                    alt="RZ"
+                    src="/assets/logo.webp"
+                    alt="RYZ PAY"
                     className="w-24 sm:w-[85px] rounded-full overflow-hidden object-cover ring-1 ring-[#0057d0]/10 cursor-pointer transition-all duration-300 hover:scale-105"
                 />
             </div>
             <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
                 <div className="mb-4 sm:mb-3">
-                    <h3 className="font-semibold text-xl text-[#0057d0] sm:text-[#6D7F9A]">RZ</h3>
+                    <h3 className="font-semibold text-xl text-[#0057d0] sm:text-[#6D7F9A]">RYZ PAY</h3>
                     {/* Note: Original text color seems to be gray, but maybe blue on active? Sticking to design analysis */}
                 </div>
                 <div className="flex gap-4">

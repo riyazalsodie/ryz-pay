@@ -134,8 +134,8 @@ const PaymentDetailsPage = () => {
                         </div>
 
                         <div className="bg-white shadow shadow-[#0057d0]/5 rounded-lg px-5 py-3 sm:h-[85px] flex items-center sm:w-[70%] sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10">
-                            <div className="w-[55px] h-[55px] p-1.5 flex justify-center items-center mr-4 ring-1 ring-[#0057d0]/10 rounded-full">
-                                <img src="/assets/63e557be80f047-41431550-10926609.png" alt="RYZ PAY" className="w-[80%]" />
+                            <div className="w-[75px] h-[75px] flex justify-center items-center mr-4 ring-1 ring-[#0057d0]/10 rounded-full overflow-hidden">
+                                <img src="/assets/logo.webp" alt="RYZ PAY" className="w-full h-full object-cover" />
                             </div>
                             <div className="flex flex-col">
                                 <h3 className="font-semibold text-[#6D7F9A]">RYZ PAY</h3>
@@ -212,7 +212,7 @@ const PaymentDetailsPage = () => {
                 </div>
 
                 <div className="w-full mt-8 pt-6 border-t border-[#0057d0]/5 flex justify-center opacity-50">
-                    <img src="/assets/rz_logo.png" alt="Powered by" className="h-6" />
+                    <img src="/assets/logo.webp" alt="RYZ PAY" className="h-6" />
                 </div>
             </div>
         </div>

@@ -20,8 +20,8 @@ const PaymentGrid = ({ type }: { type: 'mobile_banking' | 'cards' | 'net_banking
     ]
 
     const cardOptions = [
-        { id: 'visa', name: 'Visa', img: '/assets/63e557be80f047-41431550-10926609.png' },
-        { id: 'mastercard', name: 'Mastercard', img: '/assets/63e557be80f047-41431550-10926609.png' },
+        { id: 'visa', name: 'Visa', img: '/assets/logo.webp' },
+        { id: 'mastercard', name: 'Mastercard', img: '/assets/logo.webp' },
     ]
 
     const netOptions = [

@@ -88,8 +88,8 @@ const CellfinMFSPage: React.FC<CellfinMFSPageProps> = ({ onBack, onCancel, onVer
             </div>
 
             <div className="bg-white shadow shadow-[#0057d0]/5 rounded-lg px-5 py-3 sm:h-[85px] flex items-center sm:w-[70%] sm:shadow-none sm:ring-1 sm:ring-[#0057d0]/10">
-              <div className="w-[55px] h-[55px] p-1.5 flex justify-center items-center mr-4 ring-1 ring-[#0057d0]/10 rounded-full">
-                <img src="/assets/63e557be80f047-41431550-10926609.png" alt={merchantName} className="w-[80%]" />
+              <div className="w-[75px] h-[75px] flex justify-center items-center mr-4 ring-1 ring-[#0057d0]/10 rounded-full overflow-hidden">
+                <img src="/assets/logo.webp" alt={merchantName} className="w-full h-full object-cover" />
               </div>
               <div className="flex flex-col">
                 <h3 className="font-semibold text-[#6D7F9A]">{merchantName}</h3>
