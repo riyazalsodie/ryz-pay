@@ -60,7 +60,7 @@ const PaymentGrid = ({ type, methods = [] }: { type: 'mobile_banking' | 'net_ban
                         <motion.img
                             src={option.img}
                             alt={option.name}
-                            className="w-10 sm:w-12 h-auto object-contain"
+                            className="w-18 sm:w-20 h-auto object-contain"
                             whileHover={{ scale: 1.1 }}
                             transition={{ type: "spring", stiffness: 300 }}
                         />

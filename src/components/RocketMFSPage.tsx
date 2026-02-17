@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { X } from 'lucide-react'
+import { motion } from 'framer-motion'
 import CopyButton from './ui/CopyButton'
 
 interface RocketMFSPageProps {
@@ -184,13 +185,15 @@ const RocketMFSPage: React.FC<RocketMFSPageProps> = ({ onBack, onCancel, onVerif
             </div>
 
             <div className="mt-5">
-              <button
+              <motion.button
                 type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 disabled={!transactionId || isSubmitting}
-                className="bg-[#89288f] hover:bg-[#6c1e70] disabled:opacity-50 disabled:cursor-not-allowed block rounded-[10px] px-4 py-3.5 text-center font-semibold text-white transition-colors w-full"
+                className="bg-[#89288f] hover:bg-[#6c1e70] disabled:opacity-50 disabled:cursor-not-allowed block rounded-[10px] px-4 py-3.5 text-center font-semibold text-white transition-colors w-full shadow-lg shadow-[#89288f]/20"
               >
                 {isSubmitting ? 'VERIFYING...' : 'VERIFY'}
-              </button>
+              </motion.button>
             </div>
           </form>
         </div>

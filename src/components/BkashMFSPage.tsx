@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { X } from 'lucide-react'
+import { motion } from 'framer-motion'
 import CopyButton from './ui/CopyButton'
 
 interface BkashMFSPageProps {
@@ -255,13 +256,15 @@ const BkashMFSPage: React.FC<BkashMFSPageProps> = ({ onBack, onCancel, onVerify 
 
             {/* Submit Button */}
             <div className="mt-5">
-              <button
+              <motion.button
                 type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 disabled={!transactionId || isSubmitting}
-                className="bg-[#e2136e] hover:bg-[#c91062] disabled:opacity-50 disabled:cursor-not-allowed block rounded-[10px] px-4 py-3.5 text-center font-semibold text-white transition-colors w-full"
+                className="bg-[#e2136e] hover:bg-[#c91062] disabled:opacity-50 disabled:cursor-not-allowed block rounded-[10px] px-4 py-3.5 text-center font-semibold text-white transition-colors w-full shadow-lg shadow-[#e2136e]/20"
               >
                 {isSubmitting ? 'VERIFYING...' : 'VERIFY'}
-              </button>
+              </motion.button>
             </div>
           </form>
         </div>

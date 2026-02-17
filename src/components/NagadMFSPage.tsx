@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { X } from 'lucide-react'
+import { motion } from 'framer-motion'
 import CopyButton from './ui/CopyButton'
 
 interface NagadMFSPageProps {
@@ -255,13 +256,15 @@ const NagadMFSPage: React.FC<NagadMFSPageProps> = ({ onBack, onCancel, onVerify 
 
             {/* Submit Button */}
             <div className="mt-5">
-              <button
+              <motion.button
                 type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 disabled={!transactionId || isSubmitting}
-                className="bg-[#c90008] hover:bg-[#af0007] disabled:opacity-50 disabled:cursor-not-allowed block rounded-[10px] px-4 py-3.5 text-center font-semibold text-white transition-colors w-full"
+                className="bg-[#c90008] hover:bg-[#af0007] disabled:opacity-50 disabled:cursor-not-allowed block rounded-[10px] px-4 py-3.5 text-center font-semibold text-white transition-colors w-full shadow-lg shadow-[#c90008]/20"
               >
                 {isSubmitting ? 'VERIFYING...' : 'VERIFY'}
-              </button>
+              </motion.button>
             </div>
           </form>
         </div>

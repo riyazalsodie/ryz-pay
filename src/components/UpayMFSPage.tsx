@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { X } from 'lucide-react'
+import { motion } from 'framer-motion'
 import CopyButton from './ui/CopyButton'
 
 interface UpayMFSPageProps {
@@ -184,13 +185,15 @@ const UpayMFSPage: React.FC<UpayMFSPageProps> = ({ onBack, onCancel, onVerify })
             </div>
 
             <div className="mt-5">
-              <button
+              <motion.button
                 type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 disabled={!transactionId || isSubmitting}
-                className="bg-[#0054a6] hover:bg-[#00468a] disabled:opacity-50 disabled:cursor-not-allowed block rounded-[10px] px-4 py-3.5 text-center font-semibold text-white transition-colors w-full"
+                className="bg-[#0054a6] hover:bg-[#00468a] disabled:opacity-50 disabled:cursor-not-allowed block rounded-[10px] px-4 py-3.5 text-center font-semibold text-white transition-colors w-full shadow-lg shadow-[#0054a6]/20"
               >
                 {isSubmitting ? 'VERIFYING...' : 'VERIFY'}
-              </button>
+              </motion.button>
             </div>
           </form>
         </div>

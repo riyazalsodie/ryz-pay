@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { X } from 'lucide-react'
+import { motion } from 'framer-motion'
 import CopyButton from './ui/CopyButton'
 
 interface CellfinMFSPageProps {
@@ -184,13 +185,15 @@ const CellfinMFSPage: React.FC<CellfinMFSPageProps> = ({ onBack, onCancel, onVer
             </div>
 
             <div className="mt-5">
-              <button
+              <motion.button
                 type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 disabled={!transactionId || isSubmitting}
-                className="bg-[#00803d] hover:bg-[#016e35] disabled:opacity-50 disabled:cursor-not-allowed block rounded-[10px] px-4 py-3.5 text-center font-semibold text-white transition-colors w-full"
+                className="bg-[#00803d] hover:bg-[#016e35] disabled:opacity-50 disabled:cursor-not-allowed block rounded-[10px] px-4 py-3.5 text-center font-semibold text-white transition-colors w-full shadow-lg shadow-[#00803d]/20"
               >
                 {isSubmitting ? 'VERIFYING...' : 'VERIFY'}
-              </button>
+              </motion.button>
             </div>
           </form>
         </div>
