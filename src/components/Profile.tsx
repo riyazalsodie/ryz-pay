@@ -1,4 +1,5 @@
 import { Headphones, FileText, FileSpreadsheet } from 'lucide-react'
+import { motion } from 'framer-motion'
 import useStore, { TabType } from '../store/useStore'
 import clsx from 'clsx'
 
@@ -30,13 +31,16 @@ const Profile = () => {
                         const isActive = activeTab === tab.id
                         const Icon = tab.icon
                         return (
-                            <button
+                            <motion.button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
                                 className={clsx(
                                     "section-btn flex items-center justify-center sm:justify-start",
                                     isActive ? "active text-[#0057d0]" : "text-[#6D7F9A]"
                                 )}
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                transition={{ type: "spring", stiffness: 400, damping: 17 }}
                             >
                                 <Icon className={clsx("w-5 h-5", isActive ? "text-[#0057d0]" : "text-[#94A9C7]")} />
                                 <span className={clsx(
@@ -45,7 +49,7 @@ const Profile = () => {
                                 )}>
                                     {tab.label}
                                 </span>
-                            </button>
+                            </motion.button>
                         )
                     })}
                 </div>

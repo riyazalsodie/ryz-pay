@@ -1,8 +1,14 @@
 
 
+import { motion } from 'framer-motion'
+
 const TransactionDetails = () => {
     return (
-        <div className="bg-white rounded-lg shadow-md shadow-[#0057d0]/5 pb-6">
+        <motion.div
+            className="bg-white rounded-lg shadow-md shadow-[#0057d0]/5 pb-6"
+            whileHover={{ scale: 1.01 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
             <div className="px-5 py-4 sm:py-0 text-center rounded-lg bg-[#e5efff] sm:bg-transparent text-[#0057d0] font-semibold mb-4">
                 <h2 className="font-bangla sm:py-4">লেনদেনের বিস্তারিত</h2>
             </div>
@@ -22,7 +28,7 @@ const TransactionDetails = () => {
                     <p className="font-semibold text-[#0057d0]">2200.00 BDT</p>
                 </li>
             </ul>
-        </div>
+        </motion.div>
     )
 }
 

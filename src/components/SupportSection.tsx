@@ -3,6 +3,7 @@ import phoneImg from '/assets/phone-call.png'
 import messengerImg from '/assets/messenger.png'
 import whatsappImg from '/assets/whatsapp.png'
 import emailImg from '/assets/email.png'
+import { motion } from 'framer-motion'
 
 const SupportSection = () => {
     const contacts = [
@@ -22,10 +23,15 @@ const SupportSection = () => {
                     rel="noopener noreferrer"
                     className="w-full sm:w-[48%] mb-4"
                 >
-                    <div className="support-div">
+                    <motion.div
+                        className="support-div"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    >
                         <img src={contact.img} alt={contact.id} className="w-7 mr-3" />
                         <span className="text-sm text-[#485263] font-bangla">{contact.label}</span>
-                    </div>
+                    </motion.div>
                 </a>
             ))}
         </div>
