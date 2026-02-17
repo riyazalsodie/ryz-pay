@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "dotenv -e .env vite",
+    "dev:all": "concurrently \"npm run server\" \"npm run dev\"",
     "build": "dotenv -e .env vite build",
     "preview": "vite preview",
     "server": "bun --env-file=.env server/index.ts",
@@ -42,6 +43,7 @@
     "clsx": "^2.1.1",
     "dotenv-cli": "^11.0.0",
     "elysia": "^1.4.25",
+    "elysia-rate-limit": "^4.5.0",
     "framer-motion": "^12.34.1",
     "lucide-react": "^0.561.0",
     "pg": "^8.18.0",
@@ -67,6 +69,7 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^5.0.4",
     "babel-plugin-react-compiler": "^1.0.0",
+    "concurrently": "^9.2.1",
     "jsdom": "^27.0.0",
     "prettier": "^3.5.3",
     "tsx": "^4.20.6",

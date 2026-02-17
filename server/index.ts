@@ -1,6 +1,7 @@
 import { Elysia } from 'elysia';
 import { cors } from '@elysiajs/cors';
 import { swagger } from '@elysiajs/swagger';
+import { rateLimit } from 'elysia-rate-limit';
 import * as Sentry from "@sentry/bun";
 import { auth } from './auth';
 import { prisma } from '../src/lib/db';
@@ -13,10 +14,16 @@ Sentry.init({
 const app = new Elysia()
     .use(cors())
     .use(swagger())
+    .use(rateLimit({
+        duration: 60000,
+        max: 10,
+        errorResponse: "Rate limit exceeded. Please try again later."
+    }))
     .onError(({ error, code }) => {
         Sentry.captureException(error);
         console.error(`Elysia Error [${code}]:`, error);
-        return { error: error.message };
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        return { error: errorMessage };
     })
     .all('/api/auth/*', (ctx) => auth.handler(ctx.request))
     .get('/', () => 'Elysia Backend with Sentry is running')
