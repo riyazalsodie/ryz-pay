@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { X, Copy, CheckCircle2 } from 'lucide-react'
+import { X } from 'lucide-react'
+import CopyButton from './ui/CopyButton'
 
 interface BkashMFSPageProps {
   onBack?: () => void
@@ -11,7 +12,7 @@ const BkashMFSPage: React.FC<BkashMFSPageProps> = ({ onBack, onCancel, onVerify 
   const [transactionId, setTransactionId] = useState('')
   // const [phoneNumber, setPhoneNumber] = useState('') // Unused
   // const [showPhoneNumber, setShowPhoneNumber] = useState(false) // Unused
-  const [copied, setCopied] = useState(false)
+
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [_language, setLanguage] = useState<'bangla' | 'english'>('bangla')
 
@@ -20,11 +21,7 @@ const BkashMFSPage: React.FC<BkashMFSPageProps> = ({ onBack, onCancel, onVerify 
   const invoiceId = '7qwbSv7Cz4p9m5qURVZg'
   const merchantName = 'RYZ PAY'
 
-  const handleCopy = (text: string) => {
-    navigator.clipboard.writeText(text)
-    setCopied(true)
-    setTimeout(() => setCopied(false), 2000)
-  }
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -203,18 +200,7 @@ const BkashMFSPage: React.FC<BkashMFSPageProps> = ({ onBack, onCancel, onVerify 
                     <p className="sm:w-[90%] font-bangla">
                       প্রাপক নম্বর হিসেবে এই নম্বরটি লিখুনঃ
                       <span className="text-yellow-300 font-semibold ml-1">{recipientNumber}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleCopy(recipientNumber)}
-                        className="px-2 py-0.5 mx-2 rounded-md inline-flex items-center bg-[#00000040] hover:bg-[#00000060] transition-colors"
-                      >
-                        {copied ? (
-                          <CheckCircle2 className="w-3 h-3 mr-1" />
-                        ) : (
-                          <Copy className="w-3 h-3 mr-1" />
-                        )}
-                        Copy
-                      </button>
+                      <CopyButton textToCopy={recipientNumber} />
                     </p>
                   </li>
 

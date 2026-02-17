@@ -1,17 +1,13 @@
 import { useState } from 'react'
 import useStore from '../store/useStore'
-import { Copy, CheckCircle2, ChevronLeft } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react'
+import CopyButton from './ui/CopyButton'
 
 const CellfinPersonalDetails = () => {
     const { setModalPhase } = useStore()
     const [trxId, setTrxId] = useState('')
-    const [copied, setCopied] = useState(false)
 
-    const handleCopy = (text: string) => {
-        navigator.clipboard.writeText(text)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-    }
+
 
     return (
         <div className="animate-in fade-in slide-in-from-right-4 duration-300">
@@ -42,12 +38,7 @@ const CellfinPersonalDetails = () => {
                     <p className="text-xs text-slate-500 mb-1 font-bangla">প্রাপক নম্বর (Personal)</p>
                     <div className="flex justify-between items-center">
                         <span className="text-lg font-bold text-slate-700 tracking-wider">01762905013</span>
-                        <button
-                            onClick={() => handleCopy('01762905013')}
-                            className="bg-[#00803d] text-white p-1.5 rounded-md hover:bg-[#016e35] transition-colors"
-                        >
-                            {copied ? <CheckCircle2 className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                        </button>
+                        <CopyButton textToCopy="01762905013" className="bg-[#00803d] hover:bg-[#016e35] text-white" />
                     </div>
                 </div>
 

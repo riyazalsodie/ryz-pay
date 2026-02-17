@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import useStore from '../store/useStore'
-import { Copy, CheckCircle2, ChevronLeft, X } from 'lucide-react'
+import { ChevronLeft, X } from 'lucide-react'
+import CopyButton from './ui/CopyButton'
 // import Header from './Header' // Unused
 
 const PaymentDetailsPage = () => {
@@ -12,15 +13,9 @@ const PaymentDetailsPage = () => {
     } = useStore()
 
     const [trxId, setTrxId] = useState('')
-    const [copied, setCopied] = useState(false)
 
     if (!selectedPaymentMethod) return null
 
-    const handleCopy = (text: string) => {
-        navigator.clipboard.writeText(text)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-    }
 
     // Determine brand colors and details based on method
     let brandColor = '#0057d0'
@@ -171,12 +166,7 @@ const PaymentDetailsPage = () => {
                                 <p className="text-white/80 text-xs mb-1 font-bangla">প্রাপক নম্বর (Personal)</p>
                                 <div className="flex justify-between items-center">
                                     <span className="text-lg font-bold text-white tracking-wider">{recipientNumber}</span>
-                                    <button
-                                        onClick={() => handleCopy(recipientNumber)}
-                                        className="bg-white/20 text-white p-1.5 rounded-md hover:bg-white/30 transition-colors"
-                                    >
-                                        {copied ? <CheckCircle2 className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                                    </button>
+                                    <CopyButton textToCopy={recipientNumber} className="bg-white/20 hover:bg-white/30 text-white" />
                                 </div>
                             </div>
 
