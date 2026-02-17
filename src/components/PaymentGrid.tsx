@@ -7,6 +7,8 @@ import upayImg from '/assets/upay.png'
 import cellfinImg from '/assets/cellfin.png'
 import ibblImg from '/assets/650b4744ef1353-87739222-60070744.png' // IBBL
 
+import { motion } from 'framer-motion'
+
 const PaymentGrid = ({ type, methods = [] }: { type: 'mobile_banking' | 'net_banking', methods?: any[] }) => {
     const { openModal } = useStore()
     const navigate = useNavigate()
@@ -38,8 +40,10 @@ const PaymentGrid = ({ type, methods = [] }: { type: 'mobile_banking' | 'net_ban
     return (
         <div className="grid grid-cols-2 gap-5 sm:grid-cols-4 pb-6">
             {options.map((option) => (
-                <div
+                <motion.div
                     key={option.id}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => {
                         const hash = 'bac303ad226facb3bbea00fcc5e2a078b1cd8284'
                         if (option.id === 'ibbl') {
@@ -52,10 +56,16 @@ const PaymentGrid = ({ type, methods = [] }: { type: 'mobile_banking' | 'net_ban
                     }}
                     className="bank-img-div group cursor-pointer"
                 >
-                    <div className="w-full flex justify-center items-center rounded-md ring-1 ring-[#0057d0]/10 bg-white group-hover:ring-[#0057d0]/20 transition-all">
-                        <img src={option.img} alt={option.name} className="bank-img" />
+                    <div className="w-full flex justify-center items-center rounded-md ring-1 ring-[#0057d0]/10 bg-white group-hover:ring-[#0057d0]/20 transition-all overflow-hidden h-16 sm:h-20">
+                        <motion.img
+                            src={option.img}
+                            alt={option.name}
+                            className="w-10 sm:w-12 h-auto object-contain"
+                            whileHover={{ scale: 1.1 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                        />
                     </div>
-                </div>
+                </motion.div>
             ))}
         </div>
     )

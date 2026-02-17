@@ -5,7 +5,12 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 export default defineConfig({
     plugins: [
-        tanstackStart(),
+        tanstackStart({
+            prerender: {
+                enabled: true,
+                autoStaticPathsDiscovery: true,
+            }
+        }),
         tailwindcss(),
         tsconfigPaths(),
     ],
