@@ -97,6 +97,20 @@ const StyledWrapper = styled.div`
     height: 34px;
   }
 
+  @media (max-width: 640px) {
+    .switch {
+      width: 50px;
+      height: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .switch {
+      width: 44px;
+      height: 24px;
+    }
+  }
+
   .switch #input {
     opacity: 0;
     width: 0;
@@ -129,6 +143,24 @@ const StyledWrapper = styled.div`
     transition: 0.4s;
   }
 
+  @media (max-width: 640px) {
+    .sun-moon {
+      height: 22px;
+      width: 22px;
+      left: 3px;
+      bottom: 3px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .sun-moon {
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+    }
+  }
+
   #input:checked + .slider {
     background-color: black;
   }
@@ -146,6 +178,22 @@ const StyledWrapper = styled.div`
     animation: rotate-center 0.6s ease-in-out both;
   }
 
+  @media (max-width: 640px) {
+    #input:checked + .slider .sun-moon {
+      -webkit-transform: translateX(22px);
+      -ms-transform: translateX(22px);
+      transform: translateX(22px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    #input:checked + .slider .sun-moon {
+      -webkit-transform: translateX(20px);
+      -ms-transform: translateX(20px);
+      transform: translateX(20px);
+    }
+  }
+
   .moon-dot {
     opacity: 0;
     transition: 0.4s;
@@ -158,6 +206,18 @@ const StyledWrapper = styled.div`
 
   .slider.round {
     border-radius: 34px;
+  }
+
+  @media (max-width: 640px) {
+    .slider.round {
+      border-radius: 28px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .slider.round {
+      border-radius: 24px;
+    }
   }
 
   .slider.round .sun-moon {
