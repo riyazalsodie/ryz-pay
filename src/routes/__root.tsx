@@ -1,6 +1,5 @@
 import {
   Outlet,
-  ScrollRestoration,
   createRootRoute,
   HeadContent,
   Scripts,
@@ -50,7 +49,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
-        <ScrollRestoration />
+
         <Scripts />
       </body>
     </html>

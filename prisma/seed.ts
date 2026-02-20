@@ -9,10 +9,10 @@ const prisma = new PrismaClient({ adapter })
 
 async function main() {
     const methods = [
-        { name: 'bKash', icon: 'bkash.png', active: true, config: JSON.stringify({ type: 'personal' }) },
-        { name: 'Nagad', icon: 'nagad.png', active: true, config: JSON.stringify({ type: 'personal' }) },
-        { name: 'Rocket', icon: 'rocket.png', active: true, config: JSON.stringify({ type: 'personal' }) },
-        { name: 'Upay', icon: 'upay.png', active: true, config: JSON.stringify({ type: 'personal' }) },
+        { name: 'bKash', icon: 'bkash.png', active: true, config: { type: 'personal' } },
+        { name: 'Nagad', icon: 'nagad.png', active: true, config: { type: 'personal' } },
+        { name: 'Rocket', icon: 'rocket.png', active: true, config: { type: 'personal' } },
+        { name: 'Upay', icon: 'upay.png', active: true, config: { type: 'personal' } },
     ]
 
     for (const method of methods) {

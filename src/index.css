@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
     --font-sans: "Baloo Da 2", ui-sans-serif, system-ui, sans-serif;
 }
@@ -9,7 +11,7 @@ body {
 }
 
 :root {
-    color-scheme: light dark;
+    color-scheme: light;
 }
 
 @layer base {
@@ -18,15 +20,24 @@ body {
     }
 }
 
-/* OLED Dark Mode Base */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --background: 0 0% 0%;
-        --foreground: 0 0% 100%;
-    }
+/* Light Mode Base */
+:root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 0%;
+}
 
-    body {
-        background-color: black;
-        color: white;
-    }
+:root body {
+    background-color: white;
+    color: black;
+}
+
+/* OLED Dark Mode Base */
+:root.dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+}
+
+:root.dark body {
+    background-color: black;
+    color: white;
 }

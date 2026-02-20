@@ -4,8 +4,9 @@ import Layout from '../components/Layout'
 
 const getPaymentMethodsFn = createServerFn({ method: 'GET' }).handler(async () => {
   try {
-    // Use 127.0.0.1 to avoid localhost resolution issues on Windows during SSG
-    const response = await fetch('http://127.0.0.1:3001/api/payment-methods');
+    // Use VITE_API_URL from environment
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3201';
+    const response = await fetch(`${apiUrl}/api/payment-methods`);
     if (!response.ok) throw new Error('Failed to fetch payment methods');
     const methods = await response.json();
     return (methods || []) as any[];

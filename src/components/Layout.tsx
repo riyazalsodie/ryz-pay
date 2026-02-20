@@ -10,6 +10,7 @@ import Footer from './Footer'
 import PaymentModal from './PaymentModal'
 import { useLoaderData } from '@tanstack/react-router'
 import useStore from '../store/useStore'
+import Switch from './Switch'
 
 const Layout = () => {
     const { paymentMethods } = useLoaderData({ from: '/' })
@@ -54,8 +55,9 @@ const Layout = () => {
 
                     <Footer />
                 </div>
-                <div className="text-[10px] text-[#0057d0]/40 font-bold tracking-[0.2em] uppercase mt-4 mb-8 text-center w-full dark:text-gray-500">
+                <div className="text-[10px] text-[#0057d0]/40 font-bold tracking-[0.2em] uppercase mt-4 mb-8 text-center w-full dark:text-gray-500 flex flex-col items-center gap-4">
                     RYZ PAY Developed BY R ! Y 4 Z
+                    <Switch />
                 </div>
             </div>
 
