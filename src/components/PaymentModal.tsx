@@ -8,7 +8,24 @@ import RocketPersonalDetails from './RocketPersonalDetails'
 import CellfinPersonalDetails from './CellfinPersonalDetails'
 import UpayPersonalDetails from './UpayPersonalDetails'
 
-const PaymentModal = () => {
+import bkashImg from '/assets/bkash.png'
+import nagadImg from '/assets/nagad.png'
+import rocketImg from '/assets/rocket.png'
+import upayImg from '/assets/upay.png'
+import cellfinImg from '/assets/cellfin.png'
+
+const getGatewayImage = (identifier: string) => {
+    switch (identifier?.toLowerCase()) {
+        case 'bkash': return bkashImg
+        case 'nagad': return nagadImg
+        case 'rocket': return rocketImg
+        case 'upay': return upayImg
+        case 'cellfin': return cellfinImg
+        default: return bkashImg
+    }
+}
+
+const PaymentModal = ({ gateways = [] }: { gateways?: any[] }) => {
     const {
         isModalOpen,
         closeModal,
@@ -23,23 +40,34 @@ const PaymentModal = () => {
 
     if (!isModalOpen || !selectedPaymentMethod) return null
 
-    const handleSelectSubMethod = (sub: 'personal' | 'live') => {
-        setSelectedSubMethod(sub)
+    // Filter gateways for the selected method
+    const relevantGateways = gateways.filter(g =>
+        g.identifier?.toLowerCase() === selectedPaymentMethod.id.toLowerCase() && g.status
+    )
 
-        if (sub === 'personal') {
-            // Generate a sample hash for the checkout URL (same as in PaymentGrid)
-            const hash = 'bac303ad226facb3bbea00fcc5e2a078b1cd8284'
-            navigate({
-                to: '/checkout/mfs/$provider/$type/$hash',
-                params: {
-                    provider: selectedPaymentMethod.id,
-                    type: '1',
-                    hash
-                }
-            })
-            closeModal()
+    const handleSelectGateway = (gateway: any) => {
+        setSelectedSubMethod('personal') // Using 'personal' as a generic selected state for now
+
+        // Generate a sample hash for the checkout URL
+        const hash = 'bac303ad226facb3bbea00fcc5e2a078b1cd8284'
+        navigate({
+            to: '/checkout/mfs/$provider/$type/$hash',
+            params: {
+                provider: selectedPaymentMethod.id,
+                type: gateway.id, // Using gateway ID as type
+                hash
+            }
+        })
+        closeModal()
+    }
+
+    const getBadgeColor = (subType: string) => {
+        switch(subType?.toLowerCase()) {
+            case 'personal': return 'bg-[#e2136e]'
+            case 'agent': return 'bg-[#0057d0]'
+            case 'merchant': return 'bg-[#bf2929]'
+            default: return 'bg-gray-500'
         }
-        // Live option is currently empty/disabled as per request
     }
 
     return (
@@ -57,27 +85,65 @@ const PaymentModal = () => {
                             <h1 className="font-bangla text-[18px] text-slate-700 mb-6 pb-2 border-b border-b-[#e5eefa] font-[500] dark:text-white dark:border-b-white/10">Select Payment Option</h1>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-x-4 gap-y-8 mb-6">
-                            <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => handleSelectSubMethod('personal')}
-                                className="card-input w-full ring-1 ring-[#0057d0]/10 rounded-md flex flex-col justify-center items-center h-[70px] cursor-pointer hover:bg-gray-50 bg-white dark:bg-black dark:ring-white/10 dark:hover:bg-white/5"
-                            >
-                                <h2 className="mt-2 text-center text-slate-600 text-sm dark:text-gray-300">
-                                    {selectedPaymentMethod.name} <span className="bg-[#e2136e] py-[2px] px-[8px] text-xs text-white rounded-full ml-1">Personal</span>
-                                </h2>
-                            </motion.div>
-                            <motion.div
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={() => handleSelectSubMethod('live')}
-                                className="card-input w-full ring-1 ring-[#0057d0]/10 rounded-md flex flex-col justify-center items-center h-[70px] cursor-pointer hover:bg-gray-50 bg-white dark:bg-black dark:ring-white/10 dark:hover:bg-white/5"
-                            >
-                                <h2 className="mt-2 text-center text-slate-600 text-sm dark:text-gray-300">
-                                    {selectedPaymentMethod.name} Payment <span className="bg-[#bf2929] py-[2px] px-[8px] text-xs text-white rounded-full ml-1">Live</span>
-                                </h2>
-                            </motion.div>
+                        <div className="grid grid-cols-1 gap-4 mb-6 max-h-[300px] overflow-y-auto">
+                            {relevantGateways.length > 0 ? (
+                                relevantGateways.map((gateway) => (
+                                    <motion.div
+                                        key={gateway.id}
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                        onClick={() => handleSelectGateway(gateway)}
+                                        className="card-input w-full ring-1 ring-[#0057d0]/10 rounded-md flex items-center gap-4 px-4 py-3 cursor-pointer hover:bg-gray-50 bg-white dark:bg-black dark:ring-white/10 dark:hover:bg-white/5"
+                                    >
+                                        <img
+                                            src={gateway.logo || getGatewayImage(gateway.identifier)}
+                                            alt={gateway.displayName || gateway.name}
+                                            className="w-12 h-12 object-contain"
+                                        />
+                                        <div className="flex-1">
+                                            <h2 className="text-slate-600 text-sm dark:text-gray-300 font-medium">
+                                                {gateway.displayName || gateway.name}
+                                                <span className={`${getBadgeColor(gateway.subType)} py-[2px] px-[8px] text-xs text-white rounded-full ml-2 capitalize`}>
+                                                    {gateway.subType || 'Manual'}
+                                                </span>
+                                            </h2>
+                                        </div>
+                                    </motion.div>
+                                ))
+                            ) : (
+                                <motion.div
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                    onClick={() => {
+                                        // Fallback: navigate with type '1' for default behavior
+                                        const hash = 'bac303ad226facb3bbea00fcc5e2a078b1cd8284'
+                                        navigate({
+                                            to: '/checkout/mfs/$provider/$type/$hash',
+                                            params: {
+                                                provider: selectedPaymentMethod.id,
+                                                type: '1', // Default type for fallback
+                                                hash
+                                            }
+                                        })
+                                        closeModal()
+                                    }}
+                                    className="card-input w-full ring-1 ring-[#0057d0]/10 rounded-md flex items-center gap-4 px-4 py-3 cursor-pointer hover:bg-gray-50 bg-white dark:bg-black dark:ring-white/10 dark:hover:bg-white/5"
+                                >
+                                    <img
+                                        src={getGatewayImage(selectedPaymentMethod.id)}
+                                        alt={selectedPaymentMethod.name}
+                                        className="w-12 h-12 object-contain"
+                                    />
+                                    <div className="flex-1">
+                                        <h2 className="text-slate-600 text-sm dark:text-gray-300 font-medium">
+                                            {selectedPaymentMethod.name || selectedPaymentMethod.id}
+                                            <span className="bg-gray-500 py-[2px] px-[8px] text-xs text-white rounded-full ml-2 capitalize">
+                                                Default
+                                            </span>
+                                        </h2>
+                                    </div>
+                                </motion.div>
+                            )}
                         </div>
 
                         <button

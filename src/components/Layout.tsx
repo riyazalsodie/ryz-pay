@@ -13,16 +13,16 @@ import useStore from '../store/useStore'
 import Switch from './Switch'
 
 const Layout = () => {
-    const { paymentMethods } = useLoaderData({ from: '/' })
+    const { paymentMethods, gateways } = useLoaderData({ from: '/' })
     const { activeTab } = useStore()
 
     const renderContent = () => {
         switch (activeTab) {
             case 'mobile_banking':
-                return <PaymentGrid type="mobile_banking" />
+                return <PaymentGrid type="mobile_banking" gateways={gateways} methods={paymentMethods} />
 
             case 'net_banking':
-                return <PaymentGrid type="net_banking" methods={paymentMethods} />
+                return <PaymentGrid type="net_banking" methods={paymentMethods} gateways={gateways} />
             case 'support':
                 return <SupportSection />
             case 'transactions':
@@ -30,7 +30,7 @@ const Layout = () => {
             case 'faq':
                 return <FAQSection />
             default:
-                return <PaymentGrid type="mobile_banking" methods={paymentMethods} />
+                return <PaymentGrid type="mobile_banking" methods={paymentMethods} gateways={gateways} />
         }
     }
 
@@ -57,7 +57,7 @@ const Layout = () => {
                 </div>
             </div>
 
-            <PaymentModal />
+            <PaymentModal gateways={gateways} />
         </div>
     )
 }

@@ -9,7 +9,7 @@ import ibblImg from '/assets/650b4744ef1353-87739222-60070744.png' // IBBL
 
 import { motion } from 'framer-motion'
 
-const PaymentGrid = ({ type, methods = [] }: { type: 'mobile_banking' | 'net_banking', methods?: any[] }) => {
+const PaymentGrid = ({ type, methods = [], gateways = [] }: { type: 'mobile_banking' | 'net_banking', methods?: any[], gateways?: any[] }) => {
     const { openModal } = useStore()
     const navigate = useNavigate()
 
@@ -48,10 +48,9 @@ const PaymentGrid = ({ type, methods = [] }: { type: 'mobile_banking' | 'net_ban
                         const hash = 'bac303ad226facb3bbea00fcc5e2a078b1cd8284'
                         if (option.id === 'ibbl') {
                             navigate({ to: '/checkout/ibbl' })
-                        } else if (option.id === 'bkash' || option.id === 'nagad') {
-                            openModal(option);
                         } else {
-                            navigate({ to: '/checkout/mfs/$provider/$type/$hash', params: { provider: option.id, type: '1', hash } })
+                            // Always open modal for MFS - it will handle showing gateways or fallback message
+                            openModal(option);
                         }
                     }}
                     className="bank-img-div group cursor-pointer"

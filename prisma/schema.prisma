@@ -13,6 +13,9 @@ model User {
   emailVerified Boolean   @default(false)
   image         String?
   role          String    @default("user")
+  banned        Boolean?
+  banReason     String?
+  banExpires    DateTime?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   sessions      Session[]
@@ -92,4 +95,29 @@ model PaymentMethod {
   updatedAt DateTime @updatedAt
 
   @@map("payment_method")
+}
+
+model Gateway {
+  id                String   @id @default(cuid())
+  name              String   // Internal name, e.g., "Bkash Agent"
+  displayName       String   // User facing name
+  logo              String?  // URL to logo
+  currency          String   @default("BDT")
+  minAmount         Float    @default(0)
+  maxAmount         Float    @default(0)
+  fixedCharge       Float    @default(0)
+  percentCharge     Float    @default(0)
+  fixedDiscount     Float    @default(0)
+  percentDiscount   Float    @default(0)
+  status            Boolean  @default(true)
+  config            Json?    // For provider specific settings (e.g. phone number, api keys)
+  instructions      String?  // Instructions for the user
+  qrCode            String?  // URL to QR code
+  type              String   // e.g. "manual", "api"
+  identifier        String?  // e.g. "bkash", "nagad", "rocket" - to group them
+  subType           String?  // e.g. "personal", "agent", "merchant"
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("gateway")
 }

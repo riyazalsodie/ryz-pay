@@ -1,8 +1,21 @@
-import { Link } from '@tanstack/react-router'
-import { LayoutDashboard, LogOut, Settings, Users } from 'lucide-react'
+import { Link, useRouter } from '@tanstack/react-router'
+import { 
+    LayoutDashboard, 
+    LogOut, 
+    CreditCard, 
+    Users, 
+    FileText, 
+    Link as LinkIcon, 
+    BarChart3, 
+    Settings, 
+    MessageSquare, 
+    Smartphone, 
+    Shield, 
+    Activity,
+    Wallet
+} from 'lucide-react'
 import { authClient } from '../lib/auth-client'
 import { toast } from 'sonner'
-import { useRouter } from '@tanstack/react-router'
 
 export default function AdminSidebar() {
     const router = useRouter()
@@ -13,46 +26,91 @@ export default function AdminSidebar() {
         router.navigate({ to: '/admin/login' })
     }
 
+    const menuItems = [
+        { icon: LayoutDashboard, label: 'Dashboard', to: '/admin/dashboard' },
+        { icon: CreditCard, label: 'Payments', to: '/admin/payments' },
+        { icon: Wallet, label: 'Gateways', to: '/admin/gateways' },
+        { icon: Users, label: 'Customers', to: '/admin/customers' },
+        { icon: FileText, label: 'Invoices', to: '/admin/invoices' },
+        { icon: LinkIcon, label: 'Payment Links', to: '/admin/links' },
+        { icon: BarChart3, label: 'Reports', to: '/admin/reports' },
+        { icon: Settings, label: 'Brand Settings', to: '/admin/settings' },
+    ]
+
+    const automationItems = [
+        { icon: MessageSquare, label: 'SMS Data', to: '/admin/sms' },
+        { icon: Smartphone, label: 'Devices', to: '/admin/devices' },
+    ]
+
+    const adminItems = [
+        { icon: Shield, label: 'Activities', to: '/admin/activities' },
+        { icon: Activity, label: 'Billing', to: '/admin/billing' },
+    ]
+
     return (
-        <aside className="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col">
-            <div className="p-6 border-b border-gray-100">
-                <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                    <span className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-lg">A</span>
-                    Admin
+        <aside className="w-64 bg-[#111827] border-r border-gray-800 hidden md:flex flex-col">
+            <div className="p-6 border-b border-gray-800">
+                <h2 className="text-xl font-bold text-white flex items-center gap-2">
+                    <span className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-lg font-bold">P</span>
+                    paymently
                 </h2>
             </div>
 
-            <nav className="flex-1 p-4 space-y-1">
-                <Link
-                    to="/admin/dashboard"
-                    activeProps={{ className: 'bg-blue-50 text-blue-600' }}
-                    className="flex items-center gap-3 px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50 transition-colors"
-                >
-                    <LayoutDashboard size={20} />
-                    <span className="font-medium">Dashboard</span>
-                </Link>
-                {/* Add more links here as we build them */}
-                <div className="pt-4 mt-4 border-t border-gray-100">
-                    <button
-                        onClick={handleLogout}
-                        className="w-full flex items-center gap-3 px-4 py-3 text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+            <nav className="flex-1 p-4 space-y-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-800">
+                {menuItems.map((item) => (
+                    <Link
+                        key={item.to}
+                        to={item.to}
+                        activeProps={{ className: 'bg-blue-600/10 text-blue-500 border-r-2 border-blue-500' }}
+                        inactiveProps={{ className: 'text-gray-400 hover:bg-gray-800/50 hover:text-gray-200' }}
+                        className="flex items-center gap-3 px-4 py-2.5 rounded-r-lg transition-all duration-200 text-sm font-medium"
                     >
-                        <LogOut size={20} />
-                        <span className="font-medium">Sign Out</span>
-                    </button>
+                        <item.icon size={18} />
+                        <span>{item.label}</span>
+                    </Link>
+                ))}
+
+                <div className="pt-4 mt-4 mb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    MFS Automation
                 </div>
+                {automationItems.map((item) => (
+                    <Link
+                        key={item.to}
+                        to={item.to}
+                        activeProps={{ className: 'bg-blue-600/10 text-blue-500 border-r-2 border-blue-500' }}
+                        inactiveProps={{ className: 'text-gray-400 hover:bg-gray-800/50 hover:text-gray-200' }}
+                        className="flex items-center gap-3 px-4 py-2.5 rounded-r-lg transition-all duration-200 text-sm font-medium"
+                    >
+                        <item.icon size={18} />
+                        <span>{item.label}</span>
+                    </Link>
+                ))}
+
+                <div className="pt-4 mt-4 mb-2 px-4 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                    Administration
+                </div>
+                {adminItems.map((item) => (
+                    <Link
+                        key={item.to}
+                        to={item.to}
+                        activeProps={{ className: 'bg-blue-600/10 text-blue-500 border-r-2 border-blue-500' }}
+                        inactiveProps={{ className: 'text-gray-400 hover:bg-gray-800/50 hover:text-gray-200' }}
+                        className="flex items-center gap-3 px-4 py-2.5 rounded-r-lg transition-all duration-200 text-sm font-medium"
+                    >
+                        <item.icon size={18} />
+                        <span>{item.label}</span>
+                    </Link>
+                ))}
             </nav>
 
-            <div className="p-4 border-t border-gray-100">
-                <div className="flex items-center gap-3 px-4 py-3">
-                    <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-500">
-                        AD
-                    </div>
-                    <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate">Admin User</p>
-                        <p className="text-xs text-gray-500 truncate">admin@secure.com</p>
-                    </div>
-                </div>
+            <div className="p-4 border-t border-gray-800">
+                <button
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-3 px-4 py-3 text-red-400 rounded-lg hover:bg-red-500/10 transition-colors text-sm font-medium"
+                >
+                    <LogOut size={18} />
+                    <span>Sign Out</span>
+                </button>
             </div>
         </aside>
     )

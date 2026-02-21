@@ -2,25 +2,27 @@ import React, { useState } from 'react'
 import { X } from 'lucide-react'
 import { motion } from 'framer-motion'
 import CopyButton from './ui/CopyButton'
+import useStore from '../store/useStore'
 
 interface UpayMFSPageProps {
   onBack?: () => void
   onCancel?: () => void
   onVerify?: (transactionId: string, phoneNumber?: string) => void
+  gateway?: any
 }
 
-const UpayMFSPage: React.FC<UpayMFSPageProps> = ({ onBack, onCancel, onVerify }) => {
+const UpayMFSPage: React.FC<UpayMFSPageProps> = ({ onBack, onCancel, onVerify, gateway }) => {
   const [transactionId, setTransactionId] = useState('')
-  // const [showPhoneNumber, setShowPhoneNumber] = useState(false) // Unused
-  // const [phoneNumber, setPhoneNumber] = useState('') // Unused
-
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [_language, setLanguage] = useState<'bangla' | 'english'>('bangla')
+  const { language, setLanguage } = useStore()
 
-  const recipientNumber = '01762905013'
+  const recipientNumber = gateway?.config?.walletNumber || '01762905013'
   const amount = '2200'
   const invoiceId = '7qwbSv7Cz4p9m5qURVZg'
-  const merchantName = 'RYZ PAY'
+  const merchantName = gateway?.displayName || gateway?.name || 'RYZ PAY'
+
+  const instructions = gateway?.instructions
+  const subType = gateway?.subType || 'personal'
 
 
 
@@ -39,7 +41,7 @@ const UpayMFSPage: React.FC<UpayMFSPageProps> = ({ onBack, onCancel, onVerify })
   }
 
   const toggleLanguage = () => {
-    setLanguage(prev => prev === 'bangla' ? 'english' : 'bangla')
+    setLanguage(language === 'bangla' ? 'english' : 'bangla')
   }
 
   return (
@@ -136,18 +138,24 @@ const UpayMFSPage: React.FC<UpayMFSPageProps> = ({ onBack, onCancel, onVerify })
               )} */}
 
               <div className="mt-5">
-                <ul className="text-slate-200 space-y-3">
-                  <li className="flex text-sm">
-                    <div><span className="inline-block w-1.5 h-1.5 mr-2 bg-white rounded-full mb-0.5"></span></div>
-                    <p className="font-bangla">প্রথমে আপনার ফোনের Upay অ্যাপে প্রবেশ করুন।</p>
-                  </li>
-                  <hr className="border-[#00468a] my-3" />
-                  <li className="flex text-sm">
-                    <div><span className="inline-block w-1.5 h-1.5 mr-2 bg-white rounded-full mb-0.5"></span></div>
-                    <p className="font-bangla">
-                      <span className="text-yellow-300 font-semibold ml-1">"Send Money"</span> -এ ক্লিক করুন।
-                    </p>
-                  </li>
+                {instructions ? (
+                  <div
+                    className="text-slate-200 text-sm space-y-3 font-bangla [&>p]:mb-2 [&>ul]:list-disc [&>ul]:pl-5 [&>ol]:list-decimal [&>ol]:pl-5"
+                    dangerouslySetInnerHTML={{ __html: instructions }}
+                  />
+                ) : (
+                  <ul className="text-slate-200 space-y-3">
+                    <li className="flex text-sm">
+                      <div><span className="inline-block w-1.5 h-1.5 mr-2 bg-white rounded-full mb-0.5"></span></div>
+                      <p className="font-bangla">প্রথমে আপনার ফোনের Upay অ্যাপে প্রবেশ করুন।</p>
+                    </li>
+                    <hr className="border-[#00468a] my-3" />
+                    <li className="flex text-sm">
+                      <div><span className="inline-block w-1.5 h-1.5 mr-2 bg-white rounded-full mb-0.5"></span></div>
+                      <p className="font-bangla">
+                        <span className="text-yellow-300 font-semibold ml-1">{subType === 'merchant' ? '"Payment"' : '"Send Money"'}</span> -এ ক্লিক করুন।
+                      </p>
+                    </li>
                   <hr className="border-[#00468a] my-3" />
                   <li className="flex text-sm">
                     <div><span className="inline-block w-1.5 h-1.5 mr-2 bg-white rounded-full mb-0.5"></span></div>
@@ -173,14 +181,15 @@ const UpayMFSPage: React.FC<UpayMFSPageProps> = ({ onBack, onCancel, onVerify })
                     <p className="font-bangla">সবকিছু ঠিক থাকলে, আপনি Upay থেকে একটি নিশ্চিতকরণ বার্তা পাবেন।</p>
                   </li>
                   <hr className="border-[#00468a] my-3" />
-                  <li className="flex text-sm">
-                    <div><span className="inline-block w-1.5 h-1.5 mr-2 bg-white rounded-full mb-0.5"></span></div>
-                    <p className="font-bangla">
-                      এখন উপরের বক্সে আপনার<span className="text-yellow-300 font-semibold ml-1">Transaction ID</span> দিন এবং নিচের
-                      <span className="text-yellow-300 font-semibold ml-1">VERIFY</span> বাটনে ক্লিক করুন।
-                    </p>
-                  </li>
-                </ul>
+                    <li className="flex text-sm">
+                      <div><span className="inline-block w-1.5 h-1.5 mr-2 bg-white rounded-full mb-0.5"></span></div>
+                      <p className="font-bangla">
+                        এখন উপরের বক্সে আপনার<span className="text-yellow-300 font-semibold ml-1">Transaction ID</span> দিন এবং নিচের
+                        <span className="text-yellow-300 font-semibold ml-1">VERIFY</span> বাটনে ক্লিক করুন।
+                      </p>
+                    </li>
+                  </ul>
+                )}
               </div>
             </div>
 
