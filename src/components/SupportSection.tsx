@@ -8,9 +8,9 @@ import { motion } from 'framer-motion'
 const SupportSection = () => {
     const contacts = [
         { id: 'phone', label: 'আমাদের সাথে সরাসরি কথা বলতে এখানে ক্লিক করুন।', img: phoneImg, href: 'tel:+8809613825013' },
-        { id: 'messenger', label: 'মেসেঞ্জারে লাইভ চ্যাটের জন্য এখানে ক্লিক করুন।', img: messengerImg, href: 'https://m.me/amarhoster' },
+        { id: 'messenger', label: 'মেসেঞ্জারে লাইভ চ্যাটের জন্য এখানে ক্লিক করুন।', img: messengerImg, href: 'https://m.me/ryzpay' },
         { id: 'whatsapp', label: 'হোয়াটসঅ্যাপে লাইভ চ্যাটের জন্য এখানে ক্লিক করুন।', img: whatsappImg, href: 'https://wa.me/+8801406155756' },
-        { id: 'email', label: 'আমাদের সাপোর্টে ইমেইল করতে এখানে ক্লিক করুন।', img: emailImg, href: 'mailto:info@amarhoster.com' },
+        { id: 'email', label: 'আমাদের সাপোর্টে ইমেইল করতে এখানে ক্লিক করুন।', img: emailImg, href: 'mailto:info@ryzpay.com' },
     ]
 
     return (
