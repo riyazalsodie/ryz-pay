@@ -37,19 +37,46 @@ const PaymentGrid = ({ type, methods = [], gateways = [] }: { type: 'mobile_bank
         options = netOptions
     }
 
+    const filteredOptions = options.filter(option => {
+        const relevantGateways = gateways.filter(g =>
+            g.identifier?.toLowerCase() === option.id.toLowerCase() && g.status
+        )
+        return relevantGateways.length > 0
+    })
+
+    if (filteredOptions.length === 0) {
+        return null
+    }
+
     return (
         <div className="grid grid-cols-2 gap-5 sm:grid-cols-4 pb-6">
-            {options.map((option) => (
+            {filteredOptions.map((option) => {
+                const relevantGateways = gateways.filter(g =>
+                    g.identifier?.toLowerCase() === option.id.toLowerCase() && g.status
+                )
+                const singleGateway = relevantGateways.length === 1 ? relevantGateways[0] : null
+
+                return (
                 <motion.div
                     key={option.id}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => {
-                        const hash = 'bac303ad226facb3bbea00fcc5e2a078b1cd8284'
-                        if (option.id === 'ibbl') {
-                            navigate({ to: '/checkout/ibbl' })
+                        if (singleGateway) {
+                            const hash = 'bac303ad226facb3bbea00fcc5e2a078b1cd8284'
+                            if (option.id === 'ibbl') {
+                                navigate({ to: '/checkout/ibbl' })
+                            } else {
+                                navigate({
+                                    to: '/checkout/mfs/$provider/$type/$hash',
+                                    params: {
+                                        provider: option.id,
+                                        type: singleGateway.id,
+                                        hash
+                                    }
+                                })
+                            }
                         } else {
-                            // Always open modal for MFS - it will handle showing gateways or fallback message
                             openModal(option);
                         }
                     }}
@@ -65,7 +92,7 @@ const PaymentGrid = ({ type, methods = [], gateways = [] }: { type: 'mobile_bank
                         />
                     </div>
                 </motion.div>
-            ))}
+            )})}
         </div>
     )
 }

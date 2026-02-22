@@ -129,6 +129,17 @@ const app = new Elysia()
                     throw error;
                 }
             })
+            .patch('/gateways/:id/status', async ({ params, body }: { params: { id: string }, body: { status: boolean } }) => {
+                try {
+                    return await prisma.gateway.update({
+                        where: { id: params.id },
+                        data: { status: body.status }
+                    });
+                } catch (error) {
+                    Sentry.captureException(error);
+                    throw error;
+                }
+            })
             .delete('/gateways/:id', async ({ params }: { params: { id: string } }) => {
                 try {
                     return await prisma.gateway.delete({

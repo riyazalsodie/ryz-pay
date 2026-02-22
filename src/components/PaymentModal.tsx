@@ -85,25 +85,25 @@ const PaymentModal = ({ gateways = [] }: { gateways?: any[] }) => {
                             <h1 className="font-bangla text-[18px] text-slate-700 mb-6 pb-2 border-b border-b-[#e5eefa] font-[500] dark:text-white dark:border-b-white/10">Select Payment Option</h1>
                         </div>
 
-                        <div className="grid grid-cols-1 gap-4 mb-6 max-h-[300px] overflow-y-auto">
+                        <div className="grid grid-cols-1 gap-3 mb-6 max-h-[280px] overflow-y-auto overflow-x-hidden">
                             {relevantGateways.length > 0 ? (
                                 relevantGateways.map((gateway) => (
                                     <motion.div
                                         key={gateway.id}
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
+                                        whileHover={{ scale: 1.01 }}
+                                        whileTap={{ scale: 0.99 }}
                                         onClick={() => handleSelectGateway(gateway)}
-                                        className="card-input w-full ring-1 ring-[#0057d0]/10 rounded-md flex items-center gap-4 px-4 py-3 cursor-pointer hover:bg-gray-50 bg-white dark:bg-black dark:ring-white/10 dark:hover:bg-white/5"
+                                        className="card-input w-full ring-1 ring-[#0057d0]/10 rounded-md flex items-center gap-3 px-3 py-2 cursor-pointer hover:bg-gray-50 bg-white dark:bg-black dark:ring-white/10 dark:hover:bg-white/5"
                                     >
                                         <img
                                             src={gateway.logo || getGatewayImage(gateway.identifier)}
                                             alt={gateway.displayName || gateway.name}
-                                            className="w-12 h-12 object-contain"
+                                            className="w-10 h-10 object-contain flex-shrink-0"
                                         />
-                                        <div className="flex-1">
-                                            <h2 className="text-slate-600 text-sm dark:text-gray-300 font-medium">
+                                        <div className="flex-1 min-w-0">
+                                            <h2 className="text-slate-600 text-sm dark:text-gray-300 font-medium truncate">
                                                 {gateway.displayName || gateway.name}
-                                                <span className={`${getBadgeColor(gateway.subType)} py-[2px] px-[8px] text-xs text-white rounded-full ml-2 capitalize`}>
+                                                <span className={`${getBadgeColor(gateway.subType)} py-[1px] px-2 text-xs text-white rounded-full ml-1 capitalize whitespace-nowrap`}>
                                                     {gateway.subType || 'Manual'}
                                                 </span>
                                             </h2>
@@ -111,38 +111,10 @@ const PaymentModal = ({ gateways = [] }: { gateways?: any[] }) => {
                                     </motion.div>
                                 ))
                             ) : (
-                                <motion.div
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    onClick={() => {
-                                        // Fallback: navigate with type '1' for default behavior
-                                        const hash = 'bac303ad226facb3bbea00fcc5e2a078b1cd8284'
-                                        navigate({
-                                            to: '/checkout/mfs/$provider/$type/$hash',
-                                            params: {
-                                                provider: selectedPaymentMethod.id,
-                                                type: '1', // Default type for fallback
-                                                hash
-                                            }
-                                        })
-                                        closeModal()
-                                    }}
-                                    className="card-input w-full ring-1 ring-[#0057d0]/10 rounded-md flex items-center gap-4 px-4 py-3 cursor-pointer hover:bg-gray-50 bg-white dark:bg-black dark:ring-white/10 dark:hover:bg-white/5"
-                                >
-                                    <img
-                                        src={getGatewayImage(selectedPaymentMethod.id)}
-                                        alt={selectedPaymentMethod.name}
-                                        className="w-12 h-12 object-contain"
-                                    />
-                                    <div className="flex-1">
-                                        <h2 className="text-slate-600 text-sm dark:text-gray-300 font-medium">
-                                            {selectedPaymentMethod.name || selectedPaymentMethod.id}
-                                            <span className="bg-gray-500 py-[2px] px-[8px] text-xs text-white rounded-full ml-2 capitalize">
-                                                Default
-                                            </span>
-                                        </h2>
-                                    </div>
-                                </motion.div>
+                                <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+                                    <p className="text-sm">No payment options available</p>
+                                    <p className="text-xs mt-1">Please contact support for assistance</p>
+                                </div>
                             )}
                         </div>
 

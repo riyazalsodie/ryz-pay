@@ -22,7 +22,26 @@ import {
 } from '@tanstack/react-table'
 import { cn } from '../lib/utils'
 import { toast } from 'sonner'
-import { Switch } from '../components/Switch' // Assuming I have a Switch component or I'll create one inline/simple toggle
+import { Switch } from '../components/Switch'
+
+import bkashImg from '/assets/bkash.png'
+import nagadImg from '/assets/nagad.png'
+import rocketImg from '/assets/rocket.png'
+import upayImg from '/assets/upay.png'
+import cellfinImg from '/assets/cellfin.png'
+import ibblImg from '/assets/650b4744ef1353-87739222-60070744.png'
+
+const getGatewayImage = (identifier: string | null | undefined) => {
+    switch (identifier?.toLowerCase()) {
+        case 'bkash': return bkashImg
+        case 'nagad': return nagadImg
+        case 'rocket': return rocketImg
+        case 'upay': return upayImg
+        case 'cellfin': return cellfinImg
+        case 'ibbl': return ibblImg
+        default: return bkashImg
+    }
+} // Assuming I have a Switch component or I'll create one inline/simple toggle
 
 export const Route = createFileRoute('/admin/gateways')({
     component: AdminGateways,
@@ -38,6 +57,8 @@ interface Gateway {
     minAmount: number
     maxAmount: number
     type: string
+    identifier?: string
+    subType?: string
 }
 
 function AdminGateways() {
@@ -73,8 +94,8 @@ function AdminGateways() {
     const toggleStatus = async (id: string, currentStatus: boolean) => {
         try {
             const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3201'
-            const response = await fetch(`${apiUrl}/api/gateways/${id}`, {
-                method: 'PUT',
+            const response = await fetch(`${apiUrl}/api/gateways/${id}/status`, {
+                method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: !currentStatus })
             })
@@ -137,14 +158,21 @@ function AdminGateways() {
                 header: 'Display name',
                 cell: ({ row }) => (
                     <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded bg-white flex items-center justify-center overflow-hidden">
+                        <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center overflow-hidden border border-gray-700">
                             {row.original.logo ? (
                                 <img src={row.original.logo} alt={row.original.displayName} className="w-full h-full object-contain" />
                             ) : (
-                                <div className="text-xs font-bold text-gray-800">{row.original.displayName.substring(0, 2)}</div>
+                                <img
+                                    src={getGatewayImage(row.original.identifier)}
+                                    alt={row.original.displayName}
+                                    className="w-full h-full object-contain p-1"
+                                />
                             )}
                         </div>
-                        <span className="font-medium text-white">{row.original.displayName}</span>
+                        <div>
+                            <span className="font-medium text-white block">{row.original.displayName}</span>
+                            <span className="text-xs text-gray-500 capitalize">{row.original.subType || row.original.type}</span>
+                        </div>
                     </div>
                 ),
             },
@@ -180,15 +208,17 @@ function AdminGateways() {
                 cell: ({ row }) => (
                     <div className="flex items-center gap-4">
                         <button
-                            onClick={() => navigate({ to: `/admin/gateways/${row.original.id}` })}
-                            className="flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300 transition-colors"
+                            onClick={() => {
+                                window.location.href = `/admin/gateways/${row.original.id}`
+                            }}
+                            className="flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
                         >
                             <Edit className="w-3 h-3" />
                             Edit
                         </button>
                         <button
                             onClick={() => deleteGateway(row.original.id)}
-                            className="flex items-center gap-1 text-sm text-red-400 hover:text-red-300 transition-colors"
+                            className="flex items-center gap-1 text-sm text-red-400 hover:text-red-300 transition-colors cursor-pointer"
                         >
                             <Trash2 className="w-3 h-3" />
                             Delete
@@ -197,7 +227,7 @@ function AdminGateways() {
                 ),
             },
         ],
-        [gateways]
+        [gateways, navigate]
     )
 
     const table = useReactTable({

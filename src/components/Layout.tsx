@@ -16,7 +16,24 @@ const Layout = () => {
     const { paymentMethods, gateways } = useLoaderData({ from: '/' })
     const { activeTab } = useStore()
 
+    const activeGateways = gateways?.filter((g: any) => g.status) || []
+    const hasAnyGateways = activeGateways.length > 0
+
     const renderContent = () => {
+        if (!hasAnyGateways) {
+            return (
+                <div className="flex flex-col items-center justify-center py-12 text-center">
+                    <div className="w-16 h-16 mb-4 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                        <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                        </svg>
+                    </div>
+                    <h3 className="text-lg font-medium text-gray-600 dark:text-gray-300 mb-2">No gateways are available</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">Please contact support for assistance</p>
+                </div>
+            )
+        }
+
         switch (activeTab) {
             case 'mobile_banking':
                 return <PaymentGrid type="mobile_banking" gateways={gateways} methods={paymentMethods} />
