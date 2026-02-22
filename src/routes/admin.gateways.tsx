@@ -2,6 +2,7 @@ import { createFileRoute, useNavigate } from '@tanstack/react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faPlus, faEllipsisVertical, faPen, faTrash, faXmark, faCheck, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect, useMemo } from 'react'
+import { motion } from 'framer-motion'
 import {
     useReactTable,
     getCoreRowModel,
@@ -178,20 +179,27 @@ function AdminGateways() {
                 header: 'Status',
                 cell: ({ row }) => (
                     <div className="flex items-center">
-                         <button
+                         <motion.button
                             onClick={() => toggleStatus(row.original.id, row.original.status)}
                             className={cn(
-                                "relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0A0A0A]",
+                                "relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none focus:ring-0 ring-0 border-0",
                                 row.original.status ? "bg-white" : "bg-white/20"
                             )}
+                            whileTap={{ scale: 0.9, transition: { duration: 0.1 } }}
+                            layout
                         >
-                            <span
+                            <motion.span
+                                layout
+                                transition={{ type: "spring", stiffness: 600, damping: 30 }}
                                 className={cn(
-                                    "inline-block h-4 w-4 transform rounded-full bg-black transition-transform",
-                                    row.original.status ? "translate-x-6" : "translate-x-1"
+                                    "inline-block h-4 w-4 transform rounded-full",
+                                    row.original.status ? "bg-black" : "bg-white"
                                 )}
+                                animate={{
+                                    x: row.original.status ? 22 : 2
+                                }}
                             />
-                        </button>
+                        </motion.button>
                     </div>
                 ),
             },

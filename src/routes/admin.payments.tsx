@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass, faFilter, faEllipsisVertical, faArrowUpDown, faDownload, faRotateRight, faCircleCheck, faClock, faCircleXmark, faCircleExclamation, faTrash, faRotateLeft, faXmark, faChevronDown, faList, faChevronLeft, faChevronRight, faEye, faReceipt, faCopy } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faFilter, faEllipsisVertical, faArrowsUpDown, faDownload, faRotateRight, faCircleCheck, faClock, faCircleXmark, faCircleExclamation, faTrash, faRotateLeft, faXmark, faChevronDown, faList, faChevronLeft, faChevronRight, faEye, faReceipt, faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect, useMemo } from 'react'
 import { format } from 'date-fns'
 import {
@@ -79,7 +79,7 @@ function AdminPayments() {
                         type="checkbox"
                         checked={table.getIsAllPageRowsSelected()}
                         onChange={(e) => table.toggleAllPageRowsSelected(!!e.target.checked)}
-                        className="rounded border-gray-700 bg-gray-800 text-blue-600 focus:ring-blue-500 focus:ring-offset-gray-900"
+                        className="rounded border-white/20 bg-white/10 text-white focus:ring-white/50 focus:ring-offset-gray-900"
                     />
                 ),
                 cell: ({ row }) => (
@@ -87,7 +87,7 @@ function AdminPayments() {
                         type="checkbox"
                         checked={row.getIsSelected()}
                         onChange={(e) => row.toggleSelected(!!e.target.checked)}
-                        className="rounded border-gray-700 bg-gray-800 text-blue-600 focus:ring-blue-500 focus:ring-offset-gray-900"
+                        className="rounded border-white/20 bg-white/10 text-white focus:ring-white/50 focus:ring-offset-gray-900"
                     />
                 ),
                 enableSorting: false,
@@ -102,7 +102,7 @@ function AdminPayments() {
                             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
                         >
                             Customer
-                            <FontAwesomeIcon icon={faArrowUpDown} className="ml-2 h-3 w-3" />
+                            <FontAwesomeIcon icon={faArrowsUpDown} className="ml-2 h-3 w-3" />
                         </button>
                     )
                 },
@@ -129,7 +129,7 @@ function AdminPayments() {
                         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
                     >
                         Amount
-                        <FontAwesomeIcon icon={faArrowUpDown} className="ml-2 h-3 w-3" />
+                        <FontAwesomeIcon icon={faArrowsUpDown} className="ml-2 h-3 w-3" />
                     </button>
                 ),
                 cell: ({ row }) => (
@@ -155,7 +155,7 @@ function AdminPayments() {
                         navigator.clipboard.writeText(row.original.id)
                         toast.success('Copied to clipboard')
                     }}>
-                        <span className="font-mono text-xs text-gray-400 group-hover:text-blue-400 transition-colors">
+                        <span className="font-mono text-xs text-gray-400 group-hover:text-white/60 transition-colors">
                             {row.original.id.substring(0, 8)}...
                         </span>
                         <FontAwesomeIcon icon={faCopy} className="w-3 h-3 text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -170,7 +170,7 @@ function AdminPayments() {
                         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
                     >
                         Date
-                        <FontAwesomeIcon icon={faArrowUpDown} className="ml-2 h-3 w-3" />
+                        <FontAwesomeIcon icon={faArrowsUpDown} className="ml-2 h-3 w-3" />
                     </button>
                 ),
                 cell: ({ row }) => format(new Date(row.original.createdAt), 'MMM d, yyyy HH:mm'),
@@ -185,7 +185,7 @@ function AdminPayments() {
                             "px-2.5 py-1 rounded-full text-xs font-medium border",
                             status === 'SUCCESS' || status === 'COMPLETED' ? 'bg-green-500/10 text-green-500 border-green-500/20' :
                             status === 'PENDING' ? 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20' :
-                            status === 'REFUNDED' ? 'bg-blue-500/10 text-blue-500 border-blue-500/20' :
+                            status === 'REFUNDED' ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' :
                             'bg-red-500/10 text-red-500 border-red-500/20'
                         )}>
                             {status}
@@ -198,7 +198,7 @@ function AdminPayments() {
                 cell: ({ row }) => {
                     return (
                         <div className="relative group">
-                            <button className="p-2 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-white transition-colors">
+                            <button className="p-2 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-colors">
                                 <FontAwesomeIcon icon={faEllipsisVertical} className="w-4 h-4" />
                             </button>
                             {/* Simple Dropdown using group-hover for now, or use a state if needed.
@@ -232,14 +232,14 @@ function AdminPayments() {
 
     const tabs: { id: PaymentStatus; label: string; icon?: any }[] = [
         { id: 'ALL', label: 'All' },
-        { id: 'COMPLETED', label: 'Completed', icon: CheckCircle2 },
-        { id: 'PENDING', label: 'Pending', icon: Clock },
-        { id: 'REFUNDED', label: 'Refunded', icon: RotateCcw },
+        { id: 'COMPLETED', label: 'Completed', icon: faCircleCheck },
+        { id: 'PENDING', label: 'Pending', icon: faClock },
+        { id: 'REFUNDED', label: 'Refunded', icon: faRotateLeft },
         { id: 'PARTIALLY_REFUNDED', label: 'Partially refunded' },
-        { id: 'FAILED', label: 'Failed', icon: XCircle },
-        { id: 'VOIDED', label: 'Voided', icon: XCircle },
+        { id: 'FAILED', label: 'Failed', icon: faCircleXmark },
+        { id: 'VOIDED', label: 'Voided', icon: faCircleXmark },
         { id: 'INITIATED', label: 'Initiated' },
-        { id: 'TRASHED', label: 'Trashed', icon: Trash2 },
+        { id: 'TRASHED', label: 'Trashed', icon: faTrash },
     ]
 
     // Stats calculation
@@ -264,7 +264,7 @@ function AdminPayments() {
                 </div>
                 <div className="flex items-center justify-between">
                     <h1 className="text-3xl font-bold text-white tracking-tight">Payments</h1>
-                    <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium">
+                    <button className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors text-sm font-medium border border-white/20">
                             <FontAwesomeIcon icon={faDownload} className="w-4 h-4" />
                             Export CSV
                         </button>
@@ -273,23 +273,23 @@ function AdminPayments() {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div className="bg-[#111827] border border-gray-800 p-4 rounded-xl">
+                <div className="bg-white/5 border border-white/10 p-4 rounded-xl hover:bg-white/10 transition-colors">
                     <div className="text-gray-400 text-sm font-medium">Total Volume</div>
                     <div className="text-2xl font-bold text-white mt-1">
                         BDT {stats.totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2 })}
                     </div>
                 </div>
-                <div className="bg-[#111827] border border-gray-800 p-4 rounded-xl">
+                <div className="bg-white/5 border border-white/10 p-4 rounded-xl hover:bg-white/10 transition-colors">
                     <div className="text-gray-400 text-sm font-medium">Completed</div>
-                    <div className="text-2xl font-bold text-green-500 mt-1">{stats.completed}</div>
+                    <div className="text-2xl font-bold text-green-400 mt-1">{stats.completed}</div>
                 </div>
-                <div className="bg-[#111827] border border-gray-800 p-4 rounded-xl">
+                <div className="bg-white/5 border border-white/10 p-4 rounded-xl hover:bg-white/10 transition-colors">
                     <div className="text-gray-400 text-sm font-medium">Pending</div>
-                    <div className="text-2xl font-bold text-yellow-500 mt-1">{stats.pending}</div>
+                    <div className="text-2xl font-bold text-yellow-400 mt-1">{stats.pending}</div>
                 </div>
-                <div className="bg-[#111827] border border-gray-800 p-4 rounded-xl">
+                <div className="bg-white/5 border border-white/10 p-4 rounded-xl hover:bg-white/10 transition-colors">
                     <div className="text-gray-400 text-sm font-medium">Failed</div>
-                    <div className="text-2xl font-bold text-red-500 mt-1">{stats.failed}</div>
+                    <div className="text-2xl font-bold text-red-400 mt-1">{stats.failed}</div>
                 </div>
             </div>
 
@@ -302,25 +302,25 @@ function AdminPayments() {
                         className={cn(
                             "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all duration-200",
                             activeTab === tab.id
-                                ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
+                                ? 'bg-white/10 text-white shadow-lg shadow-white/10 border border-white/20'
                                 : 'bg-[#1E293B] text-gray-400 hover:bg-[#2A3855] hover:text-gray-200'
                         )}
                     >
-                        {tab.icon && <tab.icon size={14} />}
+                        {tab.icon && <FontAwesomeIcon icon={tab.icon} size={14} />}
                         {tab.label}
                     </button>
                 ))}
             </div>
 
             {/* Main Content Card */}
-            <div className="bg-[#111827] rounded-xl border border-gray-800 overflow-hidden shadow-xl">
+            <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden shadow-xl">
                 {/* Card Header */}
-                <div className="p-4 border-b border-gray-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="p-4 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="flex items-center gap-2">
                          <div className="relative">
-                            <button className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors relative">
+                            <button className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors relative">
                                 <FontAwesomeIcon icon={faFilter} className="w-5 h-5" />
-                                <span className="absolute -top-1 -right-1 w-4 h-4 bg-gray-700 text-[10px] flex items-center justify-center rounded-full text-gray-300 border border-[#111827]">0</span>
+                                <span className="absolute -top-1 -right-1 w-4 h-4 bg-white/20 text-[10px] flex items-center justify-center rounded-full text-white border border-white/10">0</span>
                             </button>
                          </div>
                     </div>
@@ -333,10 +333,10 @@ function AdminPayments() {
                                 placeholder="Search transactions..."
                                 value={globalFilter}
                                 onChange={(e) => setGlobalFilter(e.target.value)}
-                                className="pl-10 pr-4 py-2 bg-[#1F2937] border border-gray-700 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500 w-64 placeholder-gray-500 transition-colors"
+                                className="pl-10 pr-4 py-2 bg-white/10 border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-white/30 w-64 placeholder-gray-500 transition-colors"
                             />
                         </div>
-                        <button className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors">
+                        <button className="p-2 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors">
                             <FontAwesomeIcon icon={faList} className="w-5 h-5" />
                         </button>
                     </div>
@@ -346,12 +346,12 @@ function AdminPayments() {
                 <div className="relative overflow-x-auto">
                     {loading ? (
                          <div className="flex flex-col items-center justify-center h-[400px] gap-4">
-                            <FontAwesomeIcon icon={faRotateRight} className="w-8 h-8 text-blue-500 animate-spin" />
+                            <FontAwesomeIcon icon={faRotateRight} className="w-8 h-8 text-white/50 animate-spin" />
                             <p className="text-gray-400">Loading payments...</p>
                         </div>
                     ) : filteredData.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-[400px] gap-4">
-                            <div className="w-16 h-16 rounded-full bg-gray-800/50 flex items-center justify-center">
+                            <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center">
                                 <FontAwesomeIcon icon={faXmark} size="2x" className="text-gray-600" />
                             </div>
                             <p className="text-lg font-medium text-gray-400">No payments found</p>
@@ -359,7 +359,7 @@ function AdminPayments() {
                         </div>
                     ) : (
                         <table className="w-full text-sm text-left">
-                            <thead className="text-xs text-gray-400 uppercase bg-[#1F2937]/50 border-b border-gray-800">
+                            <thead className="text-xs text-gray-400 uppercase bg-white/5 border-b border-white/10">
                                 {table.getHeaderGroups().map((headerGroup) => (
                                     <tr key={headerGroup.id}>
                                         {headerGroup.headers.map((header) => (
@@ -375,13 +375,13 @@ function AdminPayments() {
                                     </tr>
                                 ))}
                             </thead>
-                            <tbody className="divide-y divide-gray-800">
+                            <tbody className="divide-y divide-white/10">
                                 {table.getRowModel().rows.map((row) => (
                                     <tr
                                         key={row.id}
                                         className={cn(
-                                            "hover:bg-gray-800/30 transition-colors group",
-                                            row.getIsSelected() && "bg-blue-900/10"
+                                            "hover:bg-white/5 transition-colors group",
+                                            row.getIsSelected() && "bg-white/10"
                                         )}
                                     >
                                         {row.getVisibleCells().map((cell) => (
@@ -398,7 +398,7 @@ function AdminPayments() {
 
                 {/* Footer Pagination */}
                 {filteredData.length > 0 && (
-                    <div className="p-4 border-t border-gray-800 flex items-center justify-between">
+                    <div className="p-4 border-t border-white/10 flex items-center justify-between">
                         <div className="text-sm text-gray-400">
                             Showing {table.getRowModel().rows.length} of {filteredData.length} results
                         </div>
@@ -410,7 +410,7 @@ function AdminPayments() {
                                     onChange={(e) => {
                                         table.setPageSize(Number(e.target.value))
                                     }}
-                                    className="bg-[#1F2937] border border-gray-700 text-white rounded px-2 py-1 text-sm focus:outline-none focus:border-blue-500"
+                                    className="bg-white/10 border border-white/10 text-white rounded px-2 py-1 text-sm focus:outline-none focus:border-white/30"
                                 >
                                     {[10, 20, 30, 40, 50].map((pageSize) => (
                                         <option key={pageSize} value={pageSize}>
@@ -421,14 +421,14 @@ function AdminPayments() {
                             </div>
                             <div className="flex gap-1">
                                 <button
-                                    className="p-1 rounded hover:bg-gray-800 text-gray-400 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="p-1 rounded hover:bg-white/10 text-gray-400 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
                                     onClick={() => table.previousPage()}
                                     disabled={!table.getCanPreviousPage()}
                                 >
                                     <FontAwesomeIcon icon={faChevronLeft} className="w-5 h-5" />
                                 </button>
                                 <button
-                                    className="p-1 rounded hover:bg-gray-800 text-gray-400 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                                    className="p-1 rounded hover:bg-white/10 text-gray-400 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
                                     onClick={() => table.nextPage()}
                                     disabled={!table.getCanNextPage()}
                                 >

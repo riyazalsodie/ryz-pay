@@ -40,9 +40,9 @@ function AdminLogin() {
 
   useEffect(() => {
     if (session?.user.role === 'admin') {
-      router.navigate({ to: '/admin/dashboard' })
+      window.location.href = '/admin/dashboard'
     }
-  }, [session, router])
+  }, [session])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -63,8 +63,7 @@ function AdminLogin() {
       }, {
         onSuccess: async () => {
              toast.success('Admin login successful')
-             await router.invalidate()
-             router.navigate({ to: '/admin/dashboard' })
+             window.location.href = '/admin/dashboard'
         },
         onError: (ctx) => {
             if (ctx.error.status === 429) {
