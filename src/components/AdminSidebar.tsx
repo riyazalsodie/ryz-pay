@@ -1,19 +1,6 @@
 import { Link, useRouter } from '@tanstack/react-router'
-import { 
-    LayoutDashboard, 
-    LogOut, 
-    CreditCard, 
-    Users, 
-    FileText, 
-    Link as LinkIcon, 
-    BarChart3, 
-    Settings, 
-    MessageSquare, 
-    Smartphone, 
-    Shield, 
-    Activity,
-    Wallet
-} from 'lucide-react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGauge, faRightFromBracket, faCreditCard, faUsers, faFile, faLink, faChartBar, faGear, faComment, faMobile, faShield, faWallet, faBolt } from '@fortawesome/free-solid-svg-icons'
 import { authClient } from '../lib/auth-client'
 import { toast } from 'sonner'
 
@@ -27,45 +14,51 @@ export default function AdminSidebar() {
     }
 
     const menuItems = [
-        { icon: LayoutDashboard, label: 'Dashboard', to: '/admin/dashboard' },
-        { icon: CreditCard, label: 'Payments', to: '/admin/payments' },
-        { icon: Wallet, label: 'Gateways', to: '/admin/gateways' },
-        { icon: Users, label: 'Customers', to: '/admin/customers' },
-        { icon: FileText, label: 'Invoices', to: '/admin/invoices' },
-        { icon: LinkIcon, label: 'Payment Links', to: '/admin/links' },
-        { icon: BarChart3, label: 'Reports', to: '/admin/reports' },
-        { icon: Settings, label: 'Brand Settings', to: '/admin/settings' },
+        { icon: faGauge, label: 'Dashboard', to: '/admin/dashboard' },
+        { icon: faCreditCard, label: 'Payments', to: '/admin/payments' },
+        { icon: faWallet, label: 'Gateways', to: '/admin/gateways' },
+        { icon: faUsers, label: 'Customers', to: '/admin/customers' },
+        { icon: faFile, label: 'Invoices', to: '/admin/invoices' },
+        { icon: faLink, label: 'Payment Links', to: '/admin/links' },
+        { icon: faChartBar, label: 'Reports', to: '/admin/reports' },
+        { icon: faGear, label: 'Brand Settings', to: '/admin/settings' },
     ]
 
     const automationItems = [
-        { icon: MessageSquare, label: 'SMS Data', to: '/admin/sms' },
-        { icon: Smartphone, label: 'Devices', to: '/admin/devices' },
+        { icon: faComment, label: 'SMS Data', to: '/admin/sms' },
+        { icon: faMobile, label: 'Devices', to: '/admin/devices' },
     ]
 
     const adminItems = [
-        { icon: Shield, label: 'Activities', to: '/admin/activities' },
-        { icon: Activity, label: 'Billing', to: '/admin/billing' },
+        { icon: faShield, label: 'Activities', to: '/admin/activities' },
+        { icon: faBolt, label: 'Billing', to: '/admin/billing' },
     ]
 
     return (
-        <aside className="w-64 bg-[#111827] border-r border-gray-800 hidden md:flex flex-col">
-            <div className="p-6 border-b border-gray-800">
-                <h2 className="text-xl font-bold text-white flex items-center gap-2">
-                    <span className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white text-lg font-bold">P</span>
-                    paymently
+        <aside className="w-64 bg-[#0A0A0A] border-r border-white/10 hidden md:flex flex-col">
+            <div className="p-6 border-b border-white/10">
+                <h2 className="text-xl font-bold text-white flex items-center gap-3">
+                    <div className="w-9 h-9 bg-white rounded-lg flex items-center justify-center">
+                        <span className="text-black text-lg font-bold">R</span>
+                    </div>
+                    RYZ PAY
                 </h2>
             </div>
 
-            <nav className="flex-1 p-4 space-y-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-800">
+            <nav className="flex-1 p-4 space-y-1 overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent">
                 {menuItems.map((item) => (
                     <Link
                         key={item.to}
                         to={item.to}
-                        activeProps={{ className: 'bg-blue-600/10 text-blue-500 border-r-2 border-blue-500' }}
-                        inactiveProps={{ className: 'text-gray-400 hover:bg-gray-800/50 hover:text-gray-200' }}
-                        className="flex items-center gap-3 px-4 py-2.5 rounded-r-lg transition-all duration-200 text-sm font-medium"
+                        activeProps={{
+                            className: 'bg-white text-black font-semibold border-l-2 border-white'
+                        }}
+                        inactiveProps={{
+                            className: 'text-gray-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent'
+                        }}
+                        className="flex items-center gap-3 px-4 py-2.5 rounded-r-lg transition-all duration-200 text-sm font-medium border-l-2 border-transparent"
                     >
-                        <item.icon size={18} />
+                        <FontAwesomeIcon icon={item.icon} className="w-[18px] h-[18px]" />
                         <span>{item.label}</span>
                     </Link>
                 ))}
@@ -77,11 +70,15 @@ export default function AdminSidebar() {
                     <Link
                         key={item.to}
                         to={item.to}
-                        activeProps={{ className: 'bg-blue-600/10 text-blue-500 border-r-2 border-blue-500' }}
-                        inactiveProps={{ className: 'text-gray-400 hover:bg-gray-800/50 hover:text-gray-200' }}
-                        className="flex items-center gap-3 px-4 py-2.5 rounded-r-lg transition-all duration-200 text-sm font-medium"
+                        activeProps={{
+                            className: 'bg-white text-black font-semibold border-l-2 border-white'
+                        }}
+                        inactiveProps={{
+                            className: 'text-gray-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent'
+                        }}
+                        className="flex items-center gap-3 px-4 py-2.5 rounded-r-lg transition-all duration-200 text-sm font-medium border-l-2 border-transparent"
                     >
-                        <item.icon size={18} />
+                        <FontAwesomeIcon icon={item.icon} className="w-[18px] h-[18px]" />
                         <span>{item.label}</span>
                     </Link>
                 ))}
@@ -93,22 +90,26 @@ export default function AdminSidebar() {
                     <Link
                         key={item.to}
                         to={item.to}
-                        activeProps={{ className: 'bg-blue-600/10 text-blue-500 border-r-2 border-blue-500' }}
-                        inactiveProps={{ className: 'text-gray-400 hover:bg-gray-800/50 hover:text-gray-200' }}
-                        className="flex items-center gap-3 px-4 py-2.5 rounded-r-lg transition-all duration-200 text-sm font-medium"
+                        activeProps={{
+                            className: 'bg-white text-black font-semibold border-l-2 border-white'
+                        }}
+                        inactiveProps={{
+                            className: 'text-gray-400 hover:bg-white/5 hover:text-white border-l-2 border-transparent'
+                        }}
+                        className="flex items-center gap-3 px-4 py-2.5 rounded-r-lg transition-all duration-200 text-sm font-medium border-l-2 border-transparent"
                     >
-                        <item.icon size={18} />
+                        <FontAwesomeIcon icon={item.icon} className="w-[18px] h-[18px]" />
                         <span>{item.label}</span>
                     </Link>
                 ))}
             </nav>
 
-            <div className="p-4 border-t border-gray-800">
+            <div className="p-4 border-t border-white/10">
                 <button
                     onClick={handleLogout}
-                    className="w-full flex items-center gap-3 px-4 py-3 text-red-400 rounded-lg hover:bg-red-500/10 transition-colors text-sm font-medium"
+                    className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 rounded-lg hover:bg-white/5 hover:text-white transition-colors text-sm font-medium"
                 >
-                    <LogOut size={18} />
+                    <FontAwesomeIcon icon={faRightFromBracket} className="w-[18px] h-[18px]" />
                     <span>Sign Out</span>
                 </button>
             </div>

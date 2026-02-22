@@ -1,14 +1,6 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
-import {
-    Search,
-    Plus,
-    MoreVertical,
-    Edit,
-    Trash2,
-    X,
-    Check,
-    Loader2
-} from 'lucide-react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass, faPlus, faEllipsisVertical, faPen, faTrash, faXmark, faCheck, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect, useMemo } from 'react'
 import {
     useReactTable,
@@ -41,7 +33,7 @@ const getGatewayImage = (identifier: string | null | undefined) => {
         case 'ibbl': return ibblImg
         default: return bkashImg
     }
-} // Assuming I have a Switch component or I'll create one inline/simple toggle
+}
 
 export const Route = createFileRoute('/admin/gateways')({
     component: AdminGateways,
@@ -140,7 +132,7 @@ function AdminGateways() {
                         type="checkbox"
                         checked={table.getIsAllPageRowsSelected()}
                         onChange={(e) => table.toggleAllPageRowsSelected(!!e.target.checked)}
-                        className="rounded border-gray-700 bg-gray-800 text-blue-600 focus:ring-blue-500 focus:ring-offset-gray-900"
+                        className="rounded border-white/20 bg-white/5 text-white focus:ring-white/50 focus:ring-offset-[#0A0A0A]"
                     />
                 ),
                 cell: ({ row }) => (
@@ -148,7 +140,7 @@ function AdminGateways() {
                         type="checkbox"
                         checked={row.getIsSelected()}
                         onChange={(e) => row.toggleSelected(!!e.target.checked)}
-                        className="rounded border-gray-700 bg-gray-800 text-blue-600 focus:ring-blue-500 focus:ring-offset-gray-900"
+                        className="rounded border-white/20 bg-white/5 text-white focus:ring-white/50 focus:ring-offset-[#0A0A0A]"
                     />
                 ),
                 enableSorting: false,
@@ -158,7 +150,7 @@ function AdminGateways() {
                 header: 'Display name',
                 cell: ({ row }) => (
                     <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center overflow-hidden border border-gray-700">
+                        <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center overflow-hidden border border-white/10">
                             {row.original.logo ? (
                                 <img src={row.original.logo} alt={row.original.displayName} className="w-full h-full object-contain" />
                             ) : (
@@ -189,13 +181,13 @@ function AdminGateways() {
                          <button
                             onClick={() => toggleStatus(row.original.id, row.original.status)}
                             className={cn(
-                                "relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900",
-                                row.original.status ? "bg-blue-600" : "bg-gray-700"
+                                "relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0A0A0A]",
+                                row.original.status ? "bg-white" : "bg-white/20"
                             )}
                         >
                             <span
                                 className={cn(
-                                    "inline-block h-4 w-4 transform rounded-full bg-white transition-transform",
+                                    "inline-block h-4 w-4 transform rounded-full bg-black transition-transform",
                                     row.original.status ? "translate-x-6" : "translate-x-1"
                                 )}
                             />
@@ -211,16 +203,16 @@ function AdminGateways() {
                             onClick={() => {
                                 window.location.href = `/admin/gateways/${row.original.id}`
                             }}
-                            className="flex items-center gap-1 text-sm text-blue-400 hover:text-blue-300 transition-colors cursor-pointer"
+                            className="flex items-center gap-1 text-sm text-white hover:text-gray-200 transition-colors cursor-pointer"
                         >
-                            <Edit className="w-3 h-3" />
+                            <FontAwesomeIcon icon={faPen} className="w-3 h-3" />
                             Edit
                         </button>
                         <button
                             onClick={() => deleteGateway(row.original.id)}
-                            className="flex items-center gap-1 text-sm text-red-400 hover:text-red-300 transition-colors cursor-pointer"
+                            className="flex items-center gap-1 text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
                         >
-                            <Trash2 className="w-3 h-3" />
+                            <FontAwesomeIcon icon={faTrash} className="w-3 h-3" />
                             Delete
                         </button>
                     </div>
@@ -248,59 +240,59 @@ function AdminGateways() {
     return (
         <div className="space-y-6">
             <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2 text-sm text-gray-400">
+                <div className="flex items-center gap-2 text-sm text-gray-500">
                     <span>Gateways</span>
                     <span className="text-gray-600">›</span>
-                    <span className="text-gray-200">List</span>
+                    <span className="text-gray-300">List</span>
                 </div>
                 <div className="flex items-center justify-between">
                     <h1 className="text-3xl font-bold text-white tracking-tight">Gateways</h1>
                     <button
-                        onClick={() => setIsCreateModalOpen(true)}
-                        className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium"
-                    >
-                        <Plus className="w-4 h-4" />
-                        New gateway
-                    </button>
+                            onClick={() => setIsCreateModalOpen(true)}
+                            className="flex items-center gap-2 px-4 py-2 bg-white hover:bg-gray-200 text-black rounded-lg transition-colors text-sm font-medium"
+                        >
+                            <FontAwesomeIcon icon={faPlus} className="w-4 h-4" />
+                            New gateway
+                        </button>
                 </div>
             </div>
 
-            <div className="bg-[#111827] rounded-xl border border-gray-800 overflow-hidden shadow-xl">
-                <div className="p-4 border-b border-gray-800 flex justify-end">
-                    <div className="relative w-64">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
-                        <input
+            <div className="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
+                <div className="p-4 border-b border-white/10 flex justify-end">
+                    <div className="relative">
+                            <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                            <input
                             type="text"
                             placeholder="Search..."
                             value={globalFilter}
                             onChange={(e) => setGlobalFilter(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2 bg-[#1F2937] border border-gray-700 rounded-lg text-sm text-white focus:outline-none focus:border-blue-500 placeholder-gray-500 transition-colors"
+                            className="w-full pl-10 pr-4 py-2 bg-white/5 border border-white/10 rounded-lg text-sm text-white focus:outline-none focus:border-white/30 placeholder-gray-600 transition-colors"
                         />
                     </div>
                 </div>
 
                 <div className="relative overflow-x-auto">
                     {loading ? (
-                        <div className="flex flex-col items-center justify-center h-[400px] gap-4">
-                            <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
+                        <div className="flex flex-col items-center justify-center py-12">
+                            <FontAwesomeIcon icon={faSpinner} className="w-8 h-8 text-white animate-spin mb-4" />
                             <p className="text-gray-400">Loading gateways...</p>
                         </div>
                     ) : gateways.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-[400px] gap-4">
-                            <div className="w-16 h-16 rounded-full bg-gray-800/50 flex items-center justify-center">
-                                <Search size={32} className="text-gray-600" />
+                            <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center">
+                                <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" className="text-gray-600" />
                             </div>
                             <p className="text-lg font-medium text-gray-400">No gateways found</p>
                             <button
                                 onClick={() => setIsCreateModalOpen(true)}
-                                className="text-blue-500 hover:text-blue-400 text-sm font-medium"
+                                className="text-white hover:text-gray-200 text-sm font-medium"
                             >
                                 Create your first gateway
                             </button>
                         </div>
                     ) : (
                         <table className="w-full text-sm text-left">
-                            <thead className="text-xs text-gray-400 uppercase bg-[#1F2937]/50 border-b border-gray-800">
+                            <thead className="text-xs text-gray-400 uppercase bg-white/5 border-b border-white/10">
                                 {table.getHeaderGroups().map((headerGroup) => (
                                     <tr key={headerGroup.id}>
                                         {headerGroup.headers.map((header) => (
@@ -311,9 +303,9 @@ function AdminGateways() {
                                     </tr>
                                 ))}
                             </thead>
-                            <tbody className="divide-y divide-gray-800">
+                            <tbody className="divide-y divide-white/10">
                                 {table.getRowModel().rows.map((row) => (
-                                    <tr key={row.id} className="hover:bg-gray-800/30 transition-colors">
+                                    <tr key={row.id} className="hover:bg-white/5 transition-colors">
                                         {row.getVisibleCells().map((cell) => (
                                             <td key={cell.id} className="px-6 py-4 whitespace-nowrap text-gray-300">
                                                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -373,7 +365,6 @@ function CreateGatewayModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 
         try {
             const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3201'
-            // Create a draft gateway
             const response = await fetch(`${apiUrl}/api/gateways`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -381,8 +372,8 @@ function CreateGatewayModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                     name: selected.name,
                     displayName: selected.name,
                     type: selected.type,
-                    identifier: selected.id.split('_')[0], // e.g. bkash
-                    subType: selected.id.split('_')[1], // e.g. agent
+                    identifier: selected.id.split('_')[0],
+                    subType: selected.id.split('_')[1],
                     status: false,
                     currency: 'BDT',
                     minAmount: 0,
@@ -410,20 +401,20 @@ function CreateGatewayModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-            <div className="w-full max-w-lg bg-[#111827] border border-gray-800 rounded-xl shadow-2xl animate-in fade-in zoom-in duration-200">
-                <div className="flex items-center justify-between p-4 border-b border-gray-800">
+            <div className="w-full max-w-lg bg-[#0A0A0A] border border-white/10 rounded-xl shadow-2xl animate-in fade-in zoom-in duration-200">
+                <div className="flex items-center justify-between p-4 border-b border-white/10">
                     <h2 className="text-lg font-semibold text-white">Create Gateway</h2>
                     <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors">
-                        <X size={20} />
+                        <FontAwesomeIcon icon={faXmark} className="w-5 h-5" />
                     </button>
                 </div>
 
                 <div className="p-4 space-y-4">
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-gray-300">Gateway <span className="text-red-500">*</span></label>
+                        <label className="text-sm font-medium text-gray-300">Gateway <span className="text-red-400">*</span></label>
                         <div className="relative">
                             <div
-                                className="w-full bg-[#1F2937] border border-gray-700 rounded-lg px-4 py-2 text-white flex items-center justify-between cursor-pointer"
+                                className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white flex items-center justify-between cursor-pointer"
                                 onClick={() => {
                                     document.getElementById('gateway-search')?.focus()
                                     setIsDropdownOpen(true)
@@ -432,7 +423,7 @@ function CreateGatewayModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                                 <input
                                     id="gateway-search"
                                     type="text"
-                                    className="bg-transparent border-none outline-none w-full placeholder-gray-500 text-white"
+                                    className="bg-transparent border-none outline-none w-full placeholder-gray-600 text-white"
                                     placeholder="Select an option"
                                     value={searchTerm}
                                     onChange={(e) => {
@@ -446,12 +437,12 @@ function CreateGatewayModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                             </div>
 
                             {isDropdownOpen && (
-                                <div className="absolute top-full left-0 w-full mt-1 bg-[#1F2937] border border-gray-700 rounded-lg shadow-xl max-h-60 overflow-y-auto z-10">
+                                <div className="absolute top-full left-0 w-full mt-1 bg-[#0A0A0A] border border-white/10 rounded-lg shadow-xl max-h-60 overflow-y-auto z-10">
                                     {filteredOptions.length > 0 ? (
                                         filteredOptions.map(option => (
                                             <div
                                                 key={option.id}
-                                                className="px-4 py-2 hover:bg-gray-700 cursor-pointer text-gray-200 flex items-center justify-between"
+                                                className="px-4 py-2 hover:bg-white/10 cursor-pointer text-gray-300 flex items-center justify-between"
                                                 onClick={() => {
                                                     setSelectedOption(option.id)
                                                     setSearchTerm(option.name)
@@ -459,11 +450,11 @@ function CreateGatewayModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                                                 }}
                                             >
                                                 <span>{option.name}</span>
-                                                {selectedOption === option.id && <Check size={16} className="text-blue-500" />}
+                                                {selectedOption === option.id && <FontAwesomeIcon icon={faCheck} className="w-4 h-4 text-white" />}
                                             </div>
                                         ))
                                     ) : (
-                                        <div className="px-4 py-2 text-gray-500 text-sm">No options found</div>
+                                        <div className="px-4 py-2 text-gray-600 text-sm">No options found</div>
                                     )}
                                 </div>
                             )}
@@ -471,17 +462,17 @@ function CreateGatewayModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                     </div>
                 </div>
 
-                <div className="p-4 border-t border-gray-800 flex justify-end gap-3">
+                <div className="p-4 border-t border-white/10 flex justify-end gap-3">
                     <button
                         onClick={onClose}
-                        className="px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors"
+                        className="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition-colors"
                     >
                         Cancel
                     </button>
                     <button
                         onClick={handleCreate}
                         disabled={!selectedOption}
-                        className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-colors"
+                        className="px-4 py-2 bg-white hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed text-black text-sm font-medium rounded-lg transition-colors"
                     >
                         Continue
                     </button>

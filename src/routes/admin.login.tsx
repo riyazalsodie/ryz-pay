@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import { createFileRoute, redirect, useRouter } from '@tanstack/react-router'
 import { authClient } from '../lib/auth-client'
 import { toast } from 'sonner'
-import { ShieldCheck, Lock, Mail, Eye, EyeOff, AlertCircle } from 'lucide-react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faShieldHalved, faLock, faEnvelope, faEyeSlash, faEye, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { z } from 'zod'
 
 export const Route = createFileRoute('/admin/login')({
@@ -47,7 +48,6 @@ function AdminLogin() {
     e.preventDefault()
     setErrors(null)
 
-    // Client-side validation
     const result = loginSchema.safeParse(formData)
     if (!result.success) {
       setErrors(result.error.flatten().fieldErrors)
@@ -82,18 +82,17 @@ function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0F172A] relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-900/20 via-[#0F172A] to-[#0F172A]" />
+    <div className="min-h-screen flex items-center justify-center bg-[#0A0A0A] relative overflow-hidden">
+      <div className="absolute inset-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white/5 via-[#0A0A0A] to-[#0A0A0A]" />
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/10 blur-[100px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[100px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-white/5 blur-[100px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-white/5 blur-[100px]" />
       </div>
 
-      <div className="w-full max-w-md p-8 bg-gray-900/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-800 animate-in fade-in zoom-in duration-500 relative z-10">
+      <div className="w-full max-w-md p-8 bg-white/5 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/10 animate-in fade-in zoom-in duration-500 relative z-10">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 mb-6 shadow-lg shadow-blue-500/20 group">
-            <ShieldCheck className="w-8 h-8 text-white group-hover:scale-110 transition-transform duration-300" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white mb-6 shadow-lg group">
+            <FontAwesomeIcon icon={faShieldHalved} className="w-8 h-8 text-black group-hover:scale-110 transition-transform duration-300" />
           </div>
           <h1 className="text-3xl font-bold text-white tracking-tight mb-2">Admin Portal</h1>
           <p className="text-gray-400">Secure access for authorized personnel</p>
@@ -103,12 +102,12 @@ function AdminLogin() {
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-300">Email Address</label>
             <div className="relative group">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 group-focus-within:text-blue-500 transition-colors" />
+              <FontAwesomeIcon icon={faEnvelope} className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 group-focus-within:text-white transition-colors" />
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full bg-gray-800/50 border border-gray-700 rounded-xl py-3 pl-10 pr-4 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
+                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-white placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all"
                 placeholder="admin@ryzpay.com"
               />
             </div>
@@ -118,23 +117,23 @@ function AdminLogin() {
           <div className="space-y-2">
             <div className="flex justify-between items-center">
               <label className="block text-sm font-medium text-gray-300">Password</label>
-              <a href="#" className="text-xs text-blue-400 hover:text-blue-300 transition-colors">Forgot password?</a>
+              <a href="#" className="text-xs text-white/60 hover:text-white transition-colors">Forgot password?</a>
             </div>
             <div className="relative group">
-              <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 group-focus-within:text-blue-500 transition-colors" />
+              <FontAwesomeIcon icon={faLock} className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 group-focus-within:text-white transition-colors" />
               <input
                 type={showPassword ? "text" : "password"}
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                className="w-full bg-gray-800/50 border border-gray-700 rounded-xl py-3 pl-10 pr-12 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all"
+                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-12 text-white placeholder:text-gray-600 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white transition-all"
                 placeholder="••••••••"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-white transition-colors"
               >
-                {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                {showPassword ? <FontAwesomeIcon icon={faEyeSlash} className="w-5 h-5" /> : <FontAwesomeIcon icon={faEye} className="w-5 h-5" />}
               </button>
             </div>
             {errors?.password && <p className="text-red-400 text-xs pl-1">{errors.password[0]}</p>}
@@ -143,25 +142,25 @@ function AdminLogin() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-3.5 rounded-xl shadow-lg shadow-blue-500/25 transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full bg-white hover:bg-gray-200 text-black font-semibold py-3.5 rounded-xl shadow-lg shadow-white/10 transition-all transform hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {loading ? (
               <>
-                <Loader2 className="w-5 h-5 animate-spin" />
+                <FontAwesomeIcon icon={faSpinner} className="w-5 h-5 animate-spin" />
                 <span>Verifying...</span>
               </>
             ) : (
               <>
                 <span>Sign In</span>
-                <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-xs">→</div>
+                <div className="w-5 h-5 rounded-full bg-black/20 flex items-center justify-center text-xs">→</div>
               </>
             )}
           </button>
         </form>
 
-        <div className="mt-8 pt-6 border-t border-gray-800 text-center">
+        <div className="mt-8 pt-6 border-t border-white/10 text-center">
           <p className="text-gray-500 text-sm">
-            Protected by RyzPay Security • <span className="text-blue-400">256-bit Encryption</span>
+            Protected by RyzPay Security • <span className="text-white/60">256-bit Encryption</span>
           </p>
         </div>
       </div>

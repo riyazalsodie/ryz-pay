@@ -1,27 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
-import {
-    Search,
-    Filter,
-    MoreHorizontal,
-    ArrowUpDown,
-    Download,
-    RefreshCw,
-    CheckCircle2,
-    Clock,
-    XCircle,
-    AlertCircle,
-    Trash2,
-    RotateCcw,
-    X,
-    ChevronDown,
-    LayoutList,
-    ChevronLeft,
-    ChevronRight,
-    MoreVertical,
-    Eye,
-    Receipt,
-    Copy
-} from 'lucide-react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass, faFilter, faEllipsisVertical, faArrowUpDown, faDownload, faRotateRight, faCircleCheck, faClock, faCircleXmark, faCircleExclamation, faTrash, faRotateLeft, faXmark, faChevronDown, faList, faChevronLeft, faChevronRight, faEye, faReceipt, faCopy } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect, useMemo } from 'react'
 import { format } from 'date-fns'
 import {
@@ -123,7 +102,7 @@ function AdminPayments() {
                             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
                         >
                             Customer
-                            <ArrowUpDown className="ml-2 h-3 w-3" />
+                            <FontAwesomeIcon icon={faArrowUpDown} className="ml-2 h-3 w-3" />
                         </button>
                     )
                 },
@@ -150,7 +129,7 @@ function AdminPayments() {
                         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
                     >
                         Amount
-                        <ArrowUpDown className="ml-2 h-3 w-3" />
+                        <FontAwesomeIcon icon={faArrowUpDown} className="ml-2 h-3 w-3" />
                     </button>
                 ),
                 cell: ({ row }) => (
@@ -179,7 +158,7 @@ function AdminPayments() {
                         <span className="font-mono text-xs text-gray-400 group-hover:text-blue-400 transition-colors">
                             {row.original.id.substring(0, 8)}...
                         </span>
-                        <Copy className="w-3 h-3 text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <FontAwesomeIcon icon={faCopy} className="w-3 h-3 text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                 ),
             },
@@ -191,7 +170,7 @@ function AdminPayments() {
                         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
                     >
                         Date
-                        <ArrowUpDown className="ml-2 h-3 w-3" />
+                        <FontAwesomeIcon icon={faArrowUpDown} className="ml-2 h-3 w-3" />
                     </button>
                 ),
                 cell: ({ row }) => format(new Date(row.original.createdAt), 'MMM d, yyyy HH:mm'),
@@ -220,7 +199,7 @@ function AdminPayments() {
                     return (
                         <div className="relative group">
                             <button className="p-2 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-white transition-colors">
-                                <MoreVertical className="w-4 h-4" />
+                                <FontAwesomeIcon icon={faEllipsisVertical} className="w-4 h-4" />
                             </button>
                             {/* Simple Dropdown using group-hover for now, or use a state if needed.
                                 Since we don't have a Dropdown component, sticking to a button for now
@@ -286,9 +265,9 @@ function AdminPayments() {
                 <div className="flex items-center justify-between">
                     <h1 className="text-3xl font-bold text-white tracking-tight">Payments</h1>
                     <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm font-medium">
-                        <Download className="w-4 h-4" />
-                        Export
-                    </button>
+                            <FontAwesomeIcon icon={faDownload} className="w-4 h-4" />
+                            Export CSV
+                        </button>
                 </div>
             </div>
 
@@ -340,7 +319,7 @@ function AdminPayments() {
                     <div className="flex items-center gap-2">
                          <div className="relative">
                             <button className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors relative">
-                                <Filter size={20} />
+                                <FontAwesomeIcon icon={faFilter} className="w-5 h-5" />
                                 <span className="absolute -top-1 -right-1 w-4 h-4 bg-gray-700 text-[10px] flex items-center justify-center rounded-full text-gray-300 border border-[#111827]">0</span>
                             </button>
                          </div>
@@ -348,7 +327,7 @@ function AdminPayments() {
 
                     <div className="flex items-center gap-3">
                         <div className="relative">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                            <FontAwesomeIcon icon={faMagnifyingGlass} className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                             <input
                                 type="text"
                                 placeholder="Search transactions..."
@@ -358,7 +337,7 @@ function AdminPayments() {
                             />
                         </div>
                         <button className="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-lg transition-colors">
-                            <LayoutList size={20} />
+                            <FontAwesomeIcon icon={faList} className="w-5 h-5" />
                         </button>
                     </div>
                 </div>
@@ -367,13 +346,13 @@ function AdminPayments() {
                 <div className="relative overflow-x-auto">
                     {loading ? (
                          <div className="flex flex-col items-center justify-center h-[400px] gap-4">
-                            <RefreshCw className="w-8 h-8 text-blue-500 animate-spin" />
+                            <FontAwesomeIcon icon={faRotateRight} className="w-8 h-8 text-blue-500 animate-spin" />
                             <p className="text-gray-400">Loading payments...</p>
                         </div>
                     ) : filteredData.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-[400px] gap-4">
                             <div className="w-16 h-16 rounded-full bg-gray-800/50 flex items-center justify-center">
-                                <X size={32} className="text-gray-600" />
+                                <FontAwesomeIcon icon={faXmark} size="2x" className="text-gray-600" />
                             </div>
                             <p className="text-lg font-medium text-gray-400">No payments found</p>
                             <p className="text-sm text-gray-500">Try adjusting your filters or search query</p>
@@ -446,14 +425,14 @@ function AdminPayments() {
                                     onClick={() => table.previousPage()}
                                     disabled={!table.getCanPreviousPage()}
                                 >
-                                    <ChevronLeft className="w-5 h-5" />
+                                    <FontAwesomeIcon icon={faChevronLeft} className="w-5 h-5" />
                                 </button>
                                 <button
                                     className="p-1 rounded hover:bg-gray-800 text-gray-400 hover:text-white disabled:opacity-50 disabled:cursor-not-allowed"
                                     onClick={() => table.nextPage()}
                                     disabled={!table.getCanNextPage()}
                                 >
-                                    <ChevronRight className="w-5 h-5" />
+                                    <FontAwesomeIcon icon={faChevronRight} className="w-5 h-5" />
                                 </button>
                             </div>
                         </div>

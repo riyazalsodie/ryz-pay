@@ -8,7 +8,7 @@ const Profile = () => {
 
     const tabs: { id: TabType, icon: any, label: string, activeLabel: string }[] = [
         { id: 'support', icon: Headphones, label: 'সাপোর্ট', activeLabel: 'Support' },
-        { id: 'faq', icon: FileText, label: 'তথ্যাদি', activeLabel: 'FAQ' }, // Label translation approx
+        { id: 'faq', icon: FileText, label: 'তথ্যাদি', activeLabel: 'FAQ' },
         { id: 'transactions', icon: FileSpreadsheet, label: 'বিস্তারিত', activeLabel: 'Transactions' },
     ]
 

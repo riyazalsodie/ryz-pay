@@ -1,12 +1,8 @@
 import { createFileRoute, useNavigate, useParams } from '@tanstack/react-router'
 import { useState, useEffect } from 'react'
 import { toast } from 'sonner'
-import {
-    Save,
-    ArrowLeft,
-    Image as ImageIcon,
-    Loader2
-} from 'lucide-react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSave, faArrowLeft, faImage, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import { cn } from '../lib/utils'
 
 function ToggleSwitch({ checked, onChange }: { checked: boolean; onChange: (checked: boolean) => void }) {
@@ -18,7 +14,7 @@ function ToggleSwitch({ checked, onChange }: { checked: boolean; onChange: (chec
                 onChange={(e) => onChange(e.target.checked)}
                 className="sr-only peer"
             />
-            <div className="w-11 h-6 bg-gray-700 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+            <div className="w-11 h-6 bg-white/20 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-white rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-black after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-white"></div>
         </label>
     )
 }
@@ -108,7 +104,7 @@ function EditGateway() {
     if (loading) {
         return (
             <div className="flex h-[50vh] items-center justify-center">
-                <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
+                <FontAwesomeIcon icon={faSpinner} className="h-8 w-8 animate-spin text-white" />
             </div>
         )
     }
@@ -121,9 +117,9 @@ function EditGateway() {
                 <div className="flex items-center gap-4">
                     <button
                         onClick={() => navigate({ to: '/admin/gateways' })}
-                        className="p-2 hover:bg-gray-800 rounded-lg text-gray-400 hover:text-white transition-colors"
+                        className="p-2 hover:bg-white/5 rounded-lg text-gray-400 hover:text-white transition-colors"
                     >
-                        <ArrowLeft className="w-5 h-5" />
+                        <FontAwesomeIcon icon={faArrowLeft} className="w-5 h-5" />
                     </button>
                     <h1 className="text-2xl font-bold text-white">Edit Gateway</h1>
                 </div>
@@ -137,15 +133,15 @@ function EditGateway() {
                     <button
                         onClick={handleSave}
                         disabled={saving}
-                        className="flex items-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors font-medium"
+                        className="flex items-center gap-2 px-6 py-2 bg-white hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed text-black rounded-lg transition-colors font-medium"
                     >
-                        {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                        {saving ? <FontAwesomeIcon icon={faSpinner} className="w-4 h-4 animate-spin" /> : <FontAwesomeIcon icon={faSave} className="w-4 h-4" />}
                         Save changes
                     </button>
                 </div>
             </div>
 
-            <div className="bg-[#111827] border border-gray-800 rounded-xl p-6 space-y-6">
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6 space-y-6">
                 <div>
                     <h2 className="text-lg font-semibold text-white mb-1">Gateway Information</h2>
                     <p className="text-sm text-gray-400">Basic gateway configuration and settings</p>
@@ -158,7 +154,7 @@ function EditGateway() {
                             type="text"
                             value={gateway.name}
                             onChange={(e) => setGateway({ ...gateway, name: e.target.value })}
-                            className="w-full px-4 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                            className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                         />
                         <p className="text-xs text-gray-500">The internal name of the gateway provider</p>
                     </div>
@@ -171,7 +167,7 @@ function EditGateway() {
                             type="text"
                             value={gateway.displayName}
                             onChange={(e) => setGateway({ ...gateway, displayName: e.target.value })}
-                            className="w-full px-4 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                            className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                         />
                         <p className="text-xs text-gray-500">The name displayed to users during checkout</p>
                     </div>
@@ -185,7 +181,7 @@ function EditGateway() {
                                 type="number"
                                 value={gateway.minAmount}
                                 onChange={(e) => setGateway({ ...gateway, minAmount: parseFloat(e.target.value) || 0 })}
-                                className="w-full pl-4 pr-16 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                className="w-full pl-4 pr-16 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                             />
                             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">{gateway.currency}</span>
                         </div>
@@ -201,7 +197,7 @@ function EditGateway() {
                                 type="number"
                                 value={gateway.maxAmount}
                                 onChange={(e) => setGateway({ ...gateway, maxAmount: parseFloat(e.target.value) || 0 })}
-                                className="w-full pl-4 pr-16 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                className="w-full pl-4 pr-16 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                             />
                             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">{gateway.currency}</span>
                         </div>
@@ -217,7 +213,7 @@ function EditGateway() {
                                 type="number"
                                 value={gateway.fixedDiscount}
                                 onChange={(e) => setGateway({ ...gateway, fixedDiscount: parseFloat(e.target.value) || 0 })}
-                                className="w-full pl-4 pr-16 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                className="w-full pl-4 pr-16 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                             />
                             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">{gateway.currency}</span>
                         </div>
@@ -233,7 +229,7 @@ function EditGateway() {
                                 type="number"
                                 value={gateway.percentDiscount}
                                 onChange={(e) => setGateway({ ...gateway, percentDiscount: parseFloat(e.target.value) || 0 })}
-                                className="w-full pl-4 pr-16 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                className="w-full pl-4 pr-16 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                             />
                             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">%</span>
                         </div>
@@ -249,7 +245,7 @@ function EditGateway() {
                                 type="number"
                                 value={gateway.fixedCharge}
                                 onChange={(e) => setGateway({ ...gateway, fixedCharge: parseFloat(e.target.value) || 0 })}
-                                className="w-full pl-4 pr-16 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                className="w-full pl-4 pr-16 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                             />
                             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">{gateway.currency}</span>
                         </div>
@@ -265,7 +261,7 @@ function EditGateway() {
                                 type="number"
                                 value={gateway.percentCharge}
                                 onChange={(e) => setGateway({ ...gateway, percentCharge: parseFloat(e.target.value) || 0 })}
-                                className="w-full pl-4 pr-16 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                className="w-full pl-4 pr-16 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                             />
                             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 text-sm">%</span>
                         </div>
@@ -282,16 +278,16 @@ function EditGateway() {
                                 value={gateway.qrCode || ''}
                                 onChange={(e) => setGateway({ ...gateway, qrCode: e.target.value })}
                                 placeholder="https://..."
-                                className="w-full px-4 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                             />
                         </div>
                         {gateway.qrCode ? (
-                            <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center overflow-hidden border border-gray-700">
+                            <div className="w-14 h-14 bg-white rounded-lg flex items-center justify-center overflow-hidden border border-white/10">
                                 <img src={gateway.qrCode} alt="QR Code" className="w-full h-full object-contain" />
                             </div>
                         ) : (
-                            <div className="w-14 h-14 bg-gray-800 rounded-lg flex items-center justify-center border border-gray-700">
-                                <ImageIcon className="text-gray-600 w-6 h-6" />
+                            <div className="w-14 h-14 bg-white/5 rounded-lg flex items-center justify-center border border-white/10">
+                                <FontAwesomeIcon icon={faImage} className="text-gray-600 w-6 h-6" />
                             </div>
                         )}
                     </div>
@@ -299,7 +295,7 @@ function EditGateway() {
                 </div>
             </div>
 
-            <div className="bg-[#111827] border border-gray-800 rounded-xl p-6 space-y-6">
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6 space-y-6">
                 <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-300">Configuration</label>
                     <p className="text-xs text-gray-500">Gateway-specific configuration parameters</p>
@@ -318,13 +314,13 @@ function EditGateway() {
                                 number: e.target.value,
                                 config: { ...gateway.config, walletNumber: e.target.value }
                             })}
-                            className="w-full px-4 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                            className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                         />
                     </div>
 
                     <div className="space-y-2">
                         <label className="text-sm font-medium text-gray-300">Pending Payment</label>
-                        <div className="flex items-center justify-between px-4 py-3 bg-[#1F2937] border border-gray-700 rounded-lg">
+                        <div className="flex items-center justify-between px-4 py-3 bg-white/5 border border-white/10 rounded-lg">
                             <span className="text-gray-300">Enable Pending Payment</span>
                             <ToggleSwitch
                                 checked={gateway.pendingPayment || false}
@@ -344,7 +340,7 @@ function EditGateway() {
                                         ...gateway,
                                         config: { ...(gateway.config as object), bankName: e.target.value }
                                     })}
-                                    className="w-full px-4 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -356,7 +352,7 @@ function EditGateway() {
                                         ...gateway,
                                         config: { ...(gateway.config as object), accountName: e.target.value }
                                     })}
-                                    className="w-full px-4 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -368,7 +364,7 @@ function EditGateway() {
                                         ...gateway,
                                         config: { ...(gateway.config as object), accountNumber: e.target.value }
                                     })}
-                                    className="w-full px-4 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -380,7 +376,7 @@ function EditGateway() {
                                         ...gateway,
                                         config: { ...(gateway.config as object), branchName: e.target.value }
                                     })}
-                                    className="w-full px-4 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -392,7 +388,7 @@ function EditGateway() {
                                         ...gateway,
                                         config: { ...(gateway.config as object), routingNumber: e.target.value }
                                     })}
-                                    className="w-full px-4 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                                 />
                             </div>
                             <div className="space-y-2">
@@ -404,7 +400,7 @@ function EditGateway() {
                                         ...gateway,
                                         config: { ...(gateway.config as object), swiftCode: e.target.value }
                                     })}
-                                    className="w-full px-4 py-2.5 bg-[#1F2937] border border-gray-700 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                    className="w-full px-4 py-2.5 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-white/30 transition-colors placeholder:text-gray-600"
                                 />
                             </div>
                         </>
@@ -412,7 +408,7 @@ function EditGateway() {
                 </div>
             </div>
 
-            <div className="bg-[#111827] border border-gray-800 rounded-xl p-6">
+            <div className="bg-white/5 border border-white/10 rounded-xl p-6">
                 <div className="flex items-center justify-between">
                     <div className="space-y-1">
                         <label className="text-sm font-medium text-gray-300">Disable</label>
@@ -435,9 +431,9 @@ function EditGateway() {
                 <button
                     onClick={handleSave}
                     disabled={saving}
-                    className="flex items-center gap-2 px-6 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg transition-colors font-medium"
+                    className="flex items-center gap-2 px-6 py-2 bg-white hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed text-black rounded-lg transition-colors font-medium"
                 >
-                    {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                    {saving ? <FontAwesomeIcon icon={faSpinner} className="w-4 h-4 animate-spin" /> : <FontAwesomeIcon icon={faSave} className="w-4 h-4" />}
                     Save changes
                 </button>
             </div>

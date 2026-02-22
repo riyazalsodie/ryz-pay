@@ -17,9 +17,9 @@ const IBBLBankingPage: React.FC<IBBLBankingPageProps> = ({ onBack, onCancel, onS
 
   const amount = '2200'
   const invoiceId = '7qwbSv7Cz4p9m5qURVZg'
-  
+
   const merchantName = gateway?.displayName || gateway?.name || 'RYZ PAY'
-  
+
   // Dynamic bank details with fallbacks
   const bankName = gateway?.config?.bankName || 'Islami Bank Bangladesh'
   const bankAccountName = gateway?.config?.accountName || 'RYZ PAY Ltd.'
