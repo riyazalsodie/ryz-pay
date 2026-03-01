@@ -16,6 +16,10 @@ export const Route = createFileRoute('/admin')({
             if (!session.data || session.data.user.role !== 'admin') {
                 throw redirect({ to: '/admin/login' })
             }
+            // Redirect /admin to /admin/dashboard
+            if (location.pathname === '/admin' || location.pathname === '/admin/') {
+                throw redirect({ to: '/admin/dashboard' })
+            }
         } catch (e) {
             if (e instanceof Response || (typeof e === 'object' && e !== null && 'to' in e)) throw e;
             throw redirect({ to: '/admin/login' })
@@ -38,6 +42,8 @@ function AdminLayout() {
 
             if (!session || session.user.role !== 'admin') {
                 router.navigate({ to: '/admin/login' })
+            } else if (location.pathname === '/admin' || location.pathname === '/admin/') {
+                router.navigate({ to: '/admin/dashboard' })
             }
             setIsChecking(false)
         }
