@@ -57,12 +57,12 @@ const Layout = () => {
                 bg-[length:24px_24px] bg-[radial-gradient(#0057d0_1px,transparent_1px)] opacity-30 dark:bg-[radial-gradient(#4b5563_1px,transparent_1px)] dark:opacity-40"></div>
 
             <div className="flex flex-col items-center w-full max-w-md mx-auto relative">
-                <div className="up-container w-full overflow-hidden p-8 relative sm:bg-white sm:rounded-lg sm:shadow-lg sm:shadow-[#0057d0]/10 sm:min-w-[650px] sm:flex sm:flex-wrap bg-[#fbfcff] dark:bg-black dark:border dark:border-white/10 dark:shadow-none">
+                <div className="up-container w-full p-8 relative sm:bg-white sm:rounded-lg sm:shadow-lg sm:shadow-[#0057d0]/10 sm:min-w-[650px] sm:flex sm:flex-wrap bg-[#fbfcff] dark:bg-black dark:border dark:border-white/10 dark:shadow-none">
                     <Header />
                     <Profile />
                     <PaymentTabs />
 
-                    <div className="overflow-auto p-0.5 mt-2 w-full pb-7 sm:pb-0 min-h-[300px]">
+                    <div className="p-0.5 mt-2 w-full pb-7 sm:pb-0 min-h-[300px]">
                         {renderContent()}
                     </div>
 

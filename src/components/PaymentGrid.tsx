@@ -59,7 +59,7 @@ const PaymentGrid = ({ type, methods = [], gateways = [] }: { type: 'mobile_bank
                 return (
                 <motion.div
                     key={option.id}
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ scale: 1.05, zIndex: 10 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => {
                         if (singleGateway) {
@@ -80,7 +80,7 @@ const PaymentGrid = ({ type, methods = [], gateways = [] }: { type: 'mobile_bank
                             openModal(option);
                         }
                     }}
-                    className="bank-img-div group cursor-pointer"
+                    className="bank-img-div group cursor-pointer relative"
                 >
                     <div className="w-full flex justify-center items-center rounded-md ring-1 ring-[#0057d0]/10 bg-white group-hover:ring-[#0057d0]/20 transition-all overflow-hidden h-16 sm:h-20 dark:bg-black dark:ring-white/10 dark:group-hover:ring-white/30">
                         <motion.img
