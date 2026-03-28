@@ -12,7 +12,7 @@ export interface PaymentMethod {
 }
 
 export type ModalPhase = 'selection' | 'details' | 'success';
-export type SubMethodType = 'personal' | 'live' | null;
+export type SubMethodType = 'personal' | 'live' | 'agent' | 'merchant' | null;
 export type ViewType = 'dashboard' | 'payment_details' | 'nagad_mfs' | 'bkash_mfs' | 'rocket_mfs' | 'cellfin_mfs' | 'upay_mfs' | 'ibbl_banking';
 
 interface StoreState {
@@ -31,6 +31,7 @@ interface StoreState {
     setModalPhase: (phase: ModalPhase) => void;
     setSelectedSubMethod: (sub: SubMethodType) => void;
     setLanguage: (lang: LanguageType) => void;
+    setSelectedPaymentMethod: (method: PaymentMethod | null) => void;
 }
 
 const useStore = create<StoreState>((set) => ({
@@ -49,6 +50,7 @@ const useStore = create<StoreState>((set) => ({
     setModalPhase: (phase) => set({ modalPhase: phase }),
     setSelectedSubMethod: (sub) => set({ selectedSubMethod: sub }),
     setLanguage: (lang) => set({ language: lang }),
+    setSelectedPaymentMethod: (method) => set({ selectedPaymentMethod: method }),
 }))
 
 export default useStore

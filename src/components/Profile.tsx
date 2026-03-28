@@ -3,8 +3,11 @@ import { motion } from 'framer-motion'
 import useStore, { TabType } from '../store/useStore'
 import clsx from 'clsx'
 
+import { useLoaderData } from '@tanstack/react-router'
+
 const Profile = () => {
     const { activeTab, setActiveTab } = useStore()
+    const { transaction } = useLoaderData({ strict: false }) as any
 
     const tabs: { id: TabType, icon: any, label: string, activeLabel: string }[] = [
         { id: 'support', icon: Headphones, label: 'সাপোর্ট', activeLabel: 'Support' },
@@ -23,7 +26,9 @@ const Profile = () => {
             </div>
             <div className="flex flex-col items-center sm:items-start text-center sm:text-left">
                 <div className="mb-4 sm:mb-3">
-                    <h3 className="font-semibold text-xl text-[#0057d0] sm:text-[#6D7F9A] dark:text-white">RYZ PAY</h3>
+                    <h3 className="font-semibold text-xl text-[#0057d0] sm:text-[#6D7F9A] dark:text-white truncate max-w-[200px] sm:max-w-none">
+                        {transaction ? `Pay to RYZ PAY` : `RYZ PAY`}
+                    </h3>
                     {/* Note: Original text color seems to be gray, but maybe blue on active? Sticking to design analysis */}
                 </div>
                 <div className="flex gap-4">

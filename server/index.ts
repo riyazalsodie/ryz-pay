@@ -165,6 +165,42 @@ const app = new Elysia()
           }
         },
       )
+      .get("/transactions/:id", async ({ params }: { params: { id: string } }) => {
+        try {
+          const transaction = await prisma.transaction.findFirst({
+            where: {
+              OR: [
+                { id: params.id },
+                { paymentId: params.id }
+              ]
+            },
+            include: {
+              user: {
+                select: {
+                  name: true,
+                  email: true,
+                },
+              },
+            },
+          });
+          if (!transaction) throw new Error("Transaction not found");
+          return transaction;
+        } catch (error: any) {
+          Sentry.captureException(error);
+          throw error;
+        }
+      })
+      .patch("/transactions/:id", async ({ params, body }: { params: { id: string }; body: any }) => {
+        try {
+          return await prisma.transaction.update({
+            where: { id: params.id },
+            data: body,
+          });
+        } catch (error) {
+          Sentry.captureException(error);
+          throw error;
+        }
+      })
       .get("/admin/customers", async () => {
         try {
           const customers = await prisma.user.findMany({

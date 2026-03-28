@@ -1,4 +1,4 @@
-import { useNavigate } from '@tanstack/react-router'
+import { useNavigate, useLoaderData } from '@tanstack/react-router'
 import useStore from '../store/useStore'
 import { motion } from 'framer-motion'
 
@@ -36,6 +36,7 @@ const PaymentModal = ({ gateways = [] }: { gateways?: any[] }) => {
         setSelectedSubMethod
     } = useStore()
 
+    const { transaction } = useLoaderData({ strict: false }) as any
     const navigate = useNavigate()
 
     if (!isModalOpen || !selectedPaymentMethod) return null
@@ -46,16 +47,16 @@ const PaymentModal = ({ gateways = [] }: { gateways?: any[] }) => {
     )
 
     const handleSelectGateway = (gateway: any) => {
-        setSelectedSubMethod('personal') // Using 'personal' as a generic selected state for now
+        console.log('Gateway selected from modal:', gateway.id, gateway.displayName);
+        setSelectedSubMethod(gateway.subType || 'personal') 
 
-        // Generate a sample hash for the checkout URL
-        const hash = 'bac303ad226facb3bbea00fcc5e2a078b1cd8284'
+        const id = transaction?.id || '7qwbSv7Cz4p9m5qURVZg'
+        console.log('Navigating to checkout with ID:', id, 'Gateway ID:', gateway.id);
         navigate({
-            to: '/checkout/mfs/$provider/$type/$hash',
+            to: '/pay/$id/$gatewayId',
             params: {
-                provider: selectedPaymentMethod.id,
-                type: gateway.id, // Using gateway ID as type
-                hash
+                id: id,
+                gatewayId: gateway.id
             }
         })
         closeModal()

@@ -1,8 +1,15 @@
 
 
 import { motion } from 'framer-motion'
+import { useLoaderData } from '@tanstack/react-router'
 
 const TransactionDetails = () => {
+    const { transaction } = useLoaderData({ strict: false }) as any
+
+    if (!transaction) return (
+        <div className="p-8 text-center text-gray-400">Loading details...</div>
+    )
+
     return (
         <motion.div
             className="bg-white rounded-lg shadow-md shadow-[#0057d0]/5 pb-6"
@@ -13,17 +20,17 @@ const TransactionDetails = () => {
             <ul className="py-4 px-5 sm:mb-5 space-y-3">
                 <li className="flex justify-between text-sm text-[#6D7F9A] sm:text-base font-semibold">
                     <p className="font-bangla">নামঃ</p>
-                    <p>MD Riyaz</p>
+                    <p>{transaction.user?.name || 'Customer'}</p>
                 </li>
                 <hr className="my-3 sm:my-1.5 border-[#6D7F9A]/10" />
                 <li className="flex justify-between text-sm text-[#6D7F9A]">
                     <p className="font-bangla">ইমেইলঃ</p>
-                    <p>ragaming777480@gmail.com</p>
+                    <p className="truncate max-w-[150px] sm:max-w-none">{transaction.user?.email || 'N/A'}</p>
                 </li>
                 <hr className="my-3 sm:my-1.5 border-[#6D7F9A]/10" />
                 <li className="flex justify-between text-sm text-[#6D7F9A]">
                     <p className="font-bangla">পরিমাণঃ</p>
-                    <p>100 BDT</p>
+                    <p>{transaction.amount} {transaction.currency || 'BDT'}</p>
                 </li>
                 <hr className="my-3 sm:my-1.5 border-[#6D7F9A]/10" />
                 <li className="flex justify-between text-sm text-[#6D7F9A]">
@@ -33,7 +40,7 @@ const TransactionDetails = () => {
                 <hr className="my-3 sm:my-1.5 border-[#6D7F9A]/10" />
                 <li className="flex justify-between text-sm text-[#6D7F9A]">
                     <p className="font-semibold font-bangla">মোট পরিমাণঃ</p>
-                    <p className="font-semibold text-[#0057d0]">100 BDT</p>
+                    <p className="font-semibold text-[#0057d0]">{transaction.amount} {transaction.currency || 'BDT'}</p>
                 </li>
             </ul>
         </motion.div>

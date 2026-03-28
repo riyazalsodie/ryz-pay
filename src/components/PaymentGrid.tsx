@@ -1,4 +1,4 @@
-import { useNavigate } from '@tanstack/react-router'
+import { useNavigate, useLoaderData } from '@tanstack/react-router'
 import useStore from '../store/useStore'
 import bkashImg from '/assets/bkash.png'
 import nagadImg from '/assets/nagad.png'
@@ -37,6 +37,8 @@ const PaymentGrid = ({ type, methods = [], gateways = [] }: { type: 'mobile_bank
         options = netOptions
     }
 
+    const { transaction } = useLoaderData({ strict: false }) as any
+
     const filteredOptions = options.filter(option => {
         const relevantGateways = gateways.filter(g =>
             g.identifier?.toLowerCase() === option.id.toLowerCase() && g.status
@@ -62,21 +64,19 @@ const PaymentGrid = ({ type, methods = [], gateways = [] }: { type: 'mobile_bank
                     whileHover={{ scale: 1.05, zIndex: 10 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => {
+                        console.log('Payment method clicked:', option.id, 'Transaction:', transaction?.id);
                         if (singleGateway) {
-                            const hash = 'bac303ad226facb3bbea00fcc5e2a078b1cd8284'
-                            if (option.id === 'ibbl') {
-                                navigate({ to: '/checkout/ibbl' })
-                            } else {
-                                navigate({
-                                    to: '/checkout/mfs/$provider/$type/$hash',
-                                    params: {
-                                        provider: option.id,
-                                        type: singleGateway.id,
-                                        hash
-                                    }
-                                })
-                            }
+                             console.log('Navigating directly to single gateway:', singleGateway.id);
+                             const id = transaction?.id || '7qwbSv7Cz4p9m5qURVZg'
+                             navigate({
+                                 to: '/pay/$id/$gatewayId',
+                                 params: {
+                                     id: id,
+                                     gatewayId: singleGateway.id
+                                 }
+                             })
                         } else {
+                            console.log('Opening selection modal for:', option.id, 'Relevant gateways:', relevantGateways.length);
                             openModal(option);
                         }
                     }}

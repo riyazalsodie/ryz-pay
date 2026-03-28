@@ -13,7 +13,7 @@ import useStore from '../store/useStore'
 import Switch from './Switch'
 
 const Layout = () => {
-    const { paymentMethods, gateways } = useLoaderData({ from: '/' })
+    const { paymentMethods, gateways, transaction } = useLoaderData({ strict: false }) as any
     const { activeTab } = useStore()
 
     const activeGateways = gateways?.filter((g: any) => g.status) || []

@@ -8,17 +8,18 @@ interface UpayMFSPageProps {
   onBack?: () => void
   onCancel?: () => void
   onVerify?: (transactionId: string, phoneNumber?: string) => void
-  gateway?: any
+  gateway: any
+  transaction: any
 }
 
-const UpayMFSPage: React.FC<UpayMFSPageProps> = ({ onBack, onCancel, onVerify, gateway }) => {
+const UpayMFSPage: React.FC<UpayMFSPageProps> = ({ onBack, onCancel, onVerify, gateway, transaction }) => {
   const [transactionId, setTransactionId] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { language, setLanguage } = useStore()
 
   const recipientNumber = gateway?.config?.walletNumber || '01762905013'
-  const amount = '2200'
-  const invoiceId = '7qwbSv7Cz4p9m5qURVZg'
+  const amount = transaction?.amount || '0'
+  const invoiceId = transaction?.id || 'Unknown'
   const merchantName = gateway?.displayName || gateway?.name || 'RYZ PAY'
 
   const instructions = gateway?.instructions
