@@ -29,6 +29,19 @@ export const Route = createRootRoute({
       },
     ],
   }),
+  notFoundComponent: () => {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#0A0A0A] text-white">
+        <div className="text-center space-y-4">
+          <h1 className="text-6xl font-bold">404</h1>
+          <p className="text-xl text-gray-400">The page you're looking for doesn't exist.</p>
+          <a href="/" className="inline-block px-6 py-2 bg-white text-black font-semibold rounded-lg hover:bg-gray-200 transition-colors">
+            Go Home
+          </a>
+        </div>
+      </div>
+    )
+  },
   component: RootComponent,
 })
 

@@ -1,44 +1,61 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { createServerFn } from '@tanstack/react-start'
-import Layout from '../components/Layout'
-
-const getPaymentMethodsFn = createServerFn({ method: 'GET' }).handler(async () => {
-  try {
-    // Use VITE_API_URL from environment
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3201';
-    const response = await fetch(`${apiUrl}/api/payment-methods`);
-    if (!response.ok) throw new Error('Failed to fetch payment methods');
-    const methods = await response.json();
-    return (methods || []) as any[];
-  } catch (error) {
-    console.error('Failed to fetch payment methods via HTTP:', error);
-    return [] as any[];
-  }
-})
-
-const getGatewaysFn = createServerFn({ method: 'GET' }).handler(async () => {
-  try {
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3201';
-    const response = await fetch(`${apiUrl}/api/gateways`);
-    if (!response.ok) throw new Error('Failed to fetch gateways');
-    const gateways = await response.json();
-    return (gateways || []) as any[];
-  } catch (error) {
-    console.error('Failed to fetch gateways via HTTP:', error);
-    return [] as any[];
-  }
-})
+import Switch from '../components/Switch'
+import { motion } from 'framer-motion'
 
 export const Route = createFileRoute('/')({
-  loader: async () => {
-    const [paymentMethods, gateways] = await Promise.all([
-      getPaymentMethodsFn(),
-      getGatewaysFn()
-    ]);
-    return {
-      paymentMethods,
-      gateways
-    }
-  },
-  component: Layout,
+  component: Homepage,
 })
+
+function Homepage() {
+  const asciiArt = `
+ ██▀███      ██▓   ▓██   ██▓    ▄▄▄         ▒███████▒
+▓██ ▒ ██▒   ▓██▒    ▒██  ██▒   ▒████▄       ▒ ▒ ▒ ▄▀░
+▓██ ░▄█ ▒   ▒██▒     ▒██ ██░   ▒██  ▀█▄     ░ ▒ ▄▀▒░ 
+▒██▀▀█▄     ░██░     ░ ▐██▓░   ░██▄▄▄▄██      ▄▀▒   ░
+░██▓ ▒██▒   ░██░     ░ ██▒▓░    ▓█   ▓██▒   ▒███████▒
+░ ▒▓ ░▒▓░   ░▓        ██▒▒▒     ▒▒   ▓▒█░   ░▒▒ ▓░▒░▒
+  ░▒ ░ ▒░    ▒ ░    ▓██ ░▒░      ▒   ▒▒ ░   ░░▒ ▒ ░ ▒
+  ░░   ░     ▒ ░    ▒ ▒ ░░       ░   ▒      ░ ░ ░ ░ ░
+   ░         ░      ░ ░              ░  ░     ░ ░    
+                    ░ ░                     ░         
+  `
+
+  return (
+    <div className="h-[100dvh] w-full flex flex-col items-center justify-center bg-white dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden font-mono selection:bg-blue-500/30 touch-none fixed inset-0">
+      {/* Dynamic Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/5 blur-[120px] dark:bg-blue-500/10" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/5 blur-[120px] dark:bg-purple-500/10" />
+      </div>
+
+      <div className="fixed top-8 right-8 z-50">
+        <Switch />
+      </div>
+      
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="relative z-10 flex flex-col items-center gap-12 w-full max-w-[95vw]"
+      >
+        <div className="relative group w-full flex justify-center">
+          <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-1000" />
+          <pre className="relative text-[min(1.5vw,10px)] sm:text-[min(1.2vw,12px)] leading-tight text-neutral-800 dark:text-neutral-200 whitespace-pre drop-shadow-sm font-bold text-center">
+            {asciiArt}
+          </pre>
+        </div>
+
+        <div className="flex flex-col items-center gap-2">
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 1 }}
+            className="text-[10px] tracking-[0.6em] uppercase text-neutral-400 dark:text-neutral-500 font-medium"
+          >
+            developed by
+          </motion.p>
+        </div>
+      </motion.div>
+    </div>
+  )
+}
