@@ -24,8 +24,7 @@ function Homepage() {
     <div className="h-[100dvh] w-full flex flex-col items-center justify-center bg-white dark:bg-[#0A0A0A] transition-colors duration-700 overflow-hidden font-mono selection:bg-blue-500/30 touch-none fixed inset-0">
       {/* Dynamic Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-500/5 blur-[120px] dark:bg-blue-500/10" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/5 blur-[120px] dark:bg-purple-500/10" />
+        <div className="absolute bottom-[-20%] left-1/2 -translate-x-1/2 w-[70%] h-[40%] rounded-full bg-blue-500/10 blur-[120px] dark:bg-blue-500/15" />
       </div>
 
       <div className="fixed top-8 right-8 z-50">
@@ -38,8 +37,7 @@ function Homepage() {
         transition={{ duration: 1, ease: "easeOut" }}
         className="relative z-10 flex flex-col items-center gap-12 w-full max-w-[95vw]"
       >
-        <div className="relative group w-full flex justify-center">
-          <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-1000" />
+        <div className="relative w-full flex justify-center">
           <pre className="relative text-[min(1.5vw,10px)] sm:text-[min(1.2vw,12px)] leading-tight text-neutral-800 dark:text-neutral-200 whitespace-pre drop-shadow-sm font-bold text-center">
             {asciiArt}
           </pre>
