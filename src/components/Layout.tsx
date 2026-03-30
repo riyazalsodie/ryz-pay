@@ -1,4 +1,5 @@
 
+import React from 'react'
 import Header from './Header'
 import Profile from './Profile'
 import PaymentTabs from './PaymentTabs'
@@ -13,11 +14,29 @@ import useStore from '../store/useStore'
 import Switch from './Switch'
 
 const Layout = () => {
-    const { paymentMethods, gateways, transaction } = useLoaderData({ strict: false }) as any
-    const { activeTab } = useStore()
+    const { paymentMethods, gateways } = useLoaderData({ strict: false }) as any
+    const { activeTab, setActiveTab } = useStore()
 
     const activeGateways = gateways?.filter((g: any) => g.status) || []
+    
+    const showMobileBanking = activeGateways.some((g: any) => 
+        paymentMethods.some((m: any) => m.name.toLowerCase() === g.identifier?.toLowerCase())
+    )
+    
+    const showNetBanking = activeGateways.some((g: any) => 
+       ['ibbl', 'islami bank'].includes(g.identifier?.toLowerCase())
+    )
+
     const hasAnyGateways = activeGateways.length > 0
+
+    // Set fallback tab if current one is not visible
+    React.useEffect(() => {
+        if (activeTab === 'mobile_banking' && !showMobileBanking && showNetBanking) {
+            setActiveTab('net_banking')
+        } else if (activeTab === 'net_banking' && !showNetBanking && showMobileBanking) {
+            setActiveTab('mobile_banking')
+        }
+    }, [showMobileBanking, showNetBanking, activeTab, setActiveTab])
 
     const renderContent = () => {
         if (!hasAnyGateways) {
@@ -60,7 +79,7 @@ const Layout = () => {
                 <div className="up-container w-full p-8 relative sm:bg-white sm:rounded-lg sm:shadow-lg sm:shadow-[#0057d0]/10 sm:min-w-[650px] sm:flex sm:flex-wrap bg-[#fbfcff] dark:bg-black dark:border dark:border-white/10 dark:shadow-none">
                     <Header />
                     <Profile />
-                    <PaymentTabs />
+                    <PaymentTabs showMobileBanking={showMobileBanking} showNetBanking={showNetBanking} />
 
                     <div className="p-0.5 mt-2 w-full pb-7 sm:pb-0 min-h-[300px]">
                         {renderContent()}

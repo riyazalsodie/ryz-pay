@@ -50,6 +50,7 @@ import BkashMFSPage from '../components/BkashMFSPage'
 import RocketMFSPage from '../components/RocketMFSPage'
 import UpayMFSPage from '../components/UpayMFSPage'
 import CellfinMFSPage from '../components/CellfinMFSPage'
+import IBBLBankingPage from '../components/IBBLBankingPage'
 import { useNavigate } from '@tanstack/react-router'
 
 function CheckoutRouteComponent() {
@@ -83,6 +84,7 @@ function CheckoutRouteComponent() {
   if (identifier === 'rocket') return <RocketMFSPage {...backProps} />
   if (identifier === 'upay') return <UpayMFSPage {...backProps} />
   if (identifier === 'cellfin') return <CellfinMFSPage {...backProps} />
+  if (identifier === 'ibbl' || identifier === 'islami bank') return <IBBLBankingPage {...backProps} />
 
   return <PaymentDetailsPage dynamicData={{ transaction, gateway }} />
 }
