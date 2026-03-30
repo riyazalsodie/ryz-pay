@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "server": "bun --env-file=.env server/index.ts",
     "db:push": "bun --env-file=.env prisma db push",
-    "db:seed": "bun --env-file=.env prisma/seed.ts"
+    "db:seed": "bun --env-file=.env prisma/seed.ts",
+    "db:generate": "bun --env-file=.env prisma generate"
   },
   "keywords": [],
   "author": "",
